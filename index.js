@@ -3,21 +3,16 @@ import {
 	elementOpen,
 	elementPlaceholder,
 	text
-} from 'incremental-dom'
+} from 'incremental-dom';
 
-function parseHead(head) {
+function getArgs(head, key) {
 	let dotSplit = head.split('.')
 	let hashSplit = dotSplit[0].split('#')
 
-	return {
-		tagName: hashSplit[0] || 'div',
-		id: hashSplit[1],
-		className: dotSplit.slice(1).join(' ')
-	}
-}
+	let tagName = hashSplit[0] || 'div'
+	let id = hashSplit[1]
+	let className = dotSplit.slice(1).join(' ')
 
-function getArgs(head, key) {
-	let { tagName, id, className } = parseHead(head)
 	let args = [tagName, key, null]
 
 	if (id || className) {
@@ -37,18 +32,21 @@ function getArgs(head, key) {
 
 export default function jsonml(markup) {
 	let attrsObj = markup[1]
-	let hasAttrs = typeof attrsObj === 'object'
-	let attrs = hasAttrs ? attrsObj : {}
-	let args = getArgs(markup[0], attrs['key'])
+	let hasAttrs = attrsObj && attrsObj.constructor === Object
+	let key = attrsObj ? attrsObj.key : null
+	let args = getArgs(markup[0], key)
 
-	for (let k in attrs) {
-		args.push(k)
-		args.push(attrs[k])
-	}
+	if (hasAttrs) {
+		for (let k in attrsObj) {
+			if (k === 'key') continue
+			args.push(k)
+			args.push(attrsObj[k])
+		}
 
-	if (attrs.__placeholder) {
-		elementPlaceholder.apply(null, args)
-		return
+		if (attrsObj.__placeholder) {
+			elementPlaceholder.apply(null, args)
+			return
+		}
 	}
 
 	elementOpen.apply(null, args)
