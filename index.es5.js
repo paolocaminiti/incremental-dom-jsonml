@@ -1,6 +1,7 @@
 var jsonml = function () {
 	var elementOpen = IncrementalDOM.elementOpen
 	var elementClose = IncrementalDOM.elementClose
+	var elementPlaceholder = IncrementalDOM.elementPlaceholder
 	var text = IncrementalDOM.text
 
 	function getArgs(head, key) {
