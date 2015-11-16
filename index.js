@@ -35,11 +35,11 @@ function getArgs(head, key) {
 	return args
 }
 
-export default function jsonML(jsonml) {
-	let attrsObj = jsonml[1]
+export default function jsonml(markup) {
+	let attrsObj = markup[1]
 	let hasAttrs = typeof attrsObj === 'object'
 	let attrs = hasAttrs ? attrsObj : {}
-	let args = getArgs(jsonml[0], attrs['key'])
+	let args = getArgs(markup[0], attrs['key'])
 
 	for (let k in attrs) {
 		args.push(k)
@@ -53,13 +53,13 @@ export default function jsonML(jsonml) {
 
 	elementOpen.apply(null, args)
 
-	for (let i = hasAttrs ? 2 : 1, len = jsonml.length, item; i < len; i++) {
-		item = jsonml[i]
+	for (let i = hasAttrs ? 2 : 1, len = markup.length, item; i < len; i++) {
+		item = markup[i]
 
 		if (!item) continue
 
 		if (Array.isArray(item)) {
-			jsonML(item)
+			jsonml(item)
 		} else {
 			text(item)
 		}
