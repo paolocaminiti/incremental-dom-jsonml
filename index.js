@@ -33,7 +33,7 @@ function getArgs(head, key) {
 	return args
 }
 
-export function IncrementalJSONML(jsonml) {
+export function jsonml2idom(jsonml) {
 	let attrsObj = jsonml[1]
 	let hasAttrs = typeof attrsObj === 'object'
 	let attrs = hasAttrs ? attrsObj : {}

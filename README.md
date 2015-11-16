@@ -1,2 +1,2 @@
-# incremental-jsonml
+# incremental-dom-jsonml
 JSONML IncrementalDOM interpreter

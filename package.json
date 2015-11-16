@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/paolocaminiti/incremental-dom-jsonml/issues"
   },
-  "homepage": "https://github.com/paolocaminiti/incremental-dom-jsonml#readme"
+  "homepage": "https://github.com/paolocaminiti/incremental-dom-jsonml#readme",
+  "dependencies": {
+    "incremental-dom": "^0.2.0"
+  }
 }
