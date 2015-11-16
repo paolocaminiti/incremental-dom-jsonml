@@ -18,22 +18,24 @@ function parseHead(head) {
 
 function getArgs(head, key) {
 	let { tagName, id, className } = parseHead(head)
-	let args = [tagName, key]
+	let args = [tagName, key, null]
 
-	if (id) {
-		args.push('id')
-		args.push(id)
-	}
-
-	if (className) {
-		args.push('class')
-		args.push(className)
+	if (id || className) {
+		let statics = args[2] = []
+		if (id) {
+			statics.push('id')
+			statics.push(id)
+		}
+		if (className) {
+			statics.push('class')
+			statics.push(className)
+		}
 	}
 
 	return args
 }
 
-export function jsonml2idom(jsonml) {
+export default function jsonML(jsonml) {
 	let attrsObj = jsonml[1]
 	let hasAttrs = typeof attrsObj === 'object'
 	let attrs = hasAttrs ? attrsObj : {}
@@ -53,9 +55,11 @@ export function jsonml2idom(jsonml) {
 
 	for (let i = hasAttrs ? 2 : 1, len = jsonml.length, item; i < len; i++) {
 		item = jsonml[i]
+
 		if (!item) continue
+
 		if (Array.isArray(item)) {
-			jsonml2idom(item)
+			jsonML(item)
 		} else {
 			text(item)
 		}
