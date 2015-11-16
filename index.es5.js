@@ -32,7 +32,7 @@ var jsonml = function () {
 	function _jsonml(markup) {
 		var attrsObj = markup[1]
 		var hasAttrs = attrsObj && attrsObj.constructor === Object
-		var key = attrsObj ? attrsObj.key : null
+		var key = hasAttrs ? attrsObj.key : null
 		var args = getArgs(markup[0], key)
 
 		if (hasAttrs) {

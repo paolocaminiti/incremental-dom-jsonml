@@ -3,7 +3,7 @@ import {
 	elementOpen,
 	elementPlaceholder,
 	text
-} from 'incremental-dom';
+} from 'incremental-dom'
 
 function getArgs(head, key) {
 	let dotSplit = head.split('.')
@@ -33,7 +33,7 @@ function getArgs(head, key) {
 export default function jsonml(markup) {
 	let attrsObj = markup[1]
 	let hasAttrs = attrsObj && attrsObj.constructor === Object
-	let key = attrsObj ? attrsObj.key : null
+	let key = hasAttrs ? attrsObj.key : null
 	let args = getArgs(markup[0], key)
 
 	if (hasAttrs) {
