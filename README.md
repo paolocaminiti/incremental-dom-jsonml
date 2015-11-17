@@ -6,7 +6,7 @@
 - there's no directives, factories, superheros, added magic or atomic science
 - the fine art of lists composition has been around for ever (jsonml quite a bit as well)
 
-There's litterally about nothing to learn here, meaning there's almost no risk of forthcoming obsolescence adopting it.
+There's litterally about nothing to learn here, meaning very little risk of forthcoming obsolescence.
 
 Your DOM is expressed by nested arrays as a pure data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, to external libraries, to ES6 goodness
 
@@ -44,7 +44,7 @@ funciton list(state) {
   return ['ul', state.list.map(item)]
 }
 
-function list(state) {
+function app(state) {
   return ['div#approt.app', { style: "color: black;" },
     ['p', 'A list in an app'],
     list(state)
@@ -67,7 +67,7 @@ Must be a string. Can contain css syntax for id and classes 'div#id.class1.class
 All key value pairs will be assigned as Incremental DOM dynamic properties. Here you can set dinamically the id and classes as { id: 'id', class: 'class1 class2', ... }.
 
 ##### Assigning an Incremental DOM key to an element
-Provide a { '__key': value, ...} in the attributes's object.
+{ __key: value, ...} assigns an Incremental DOM key to an element
 
 ##### Where is "shouldComponentUpdate"?
 In incremental DOM branches will be skipped when an element is explicitly set as a placeholder, to do so (along with a key) put { __placeholder: true, ... } in the attribute's object.
