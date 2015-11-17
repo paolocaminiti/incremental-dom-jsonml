@@ -13,11 +13,11 @@
 	<script src="/node_modules/incremental-dom/dist/incremental-dom.js"></script>
 	<script src="/index.es5.js"></script>
 
-	<script src="reducers.js"></script>
+	<script src="transformers.js"></script><!-- :) -->
 	<script src="updater.js"></script>
 </head>
 <body>
-	<p>This is a port of <a href="http://binarymuse.github.io/react-primer/build/index.html?6" targe="_blank">binarymuse's shouldComponent update demo for React</a>. The idom equivalent is elementPlaceholder, here used as attribute. Animate updates state for head item plus another random item, several ticks are batched before the next animationFrame collects them (the head is always animated to keep chrome's fps stats updating).</p>
+	<p>This is a port of <a href="http://binarymuse.github.io/react-primer/build/index.html?6" target="_blank">binarymuse's shouldComponent update demo for React</a>. The idom equivalent is elementPlaceholder, here used as attribute. Animate updates state for head item plus another random item, several ticks are batched before the next animationFrame collects them (the head is always animated to keep chrome's fps stats updating).</p>
 	<div id="approot"></div>
 
 <script>
@@ -33,15 +33,14 @@ function randomItem() {
 	}
 }
 
-// central state
+// a serializable central state
 var state = {
 	items: [
 		randomItem()
 	],
 	menu: {
 		addManyCount: 1000,
-	},
-	persist: true
+	}
 }
 
 // fragments
@@ -49,26 +48,27 @@ function item(i, index) {
 	var shouldUpdate = up.check(i)
 	var computedStyle = 'background: ' + i.color + '; width: ' + i.width + 'px';
 
-	var root = ['div.item', { key: i.id, style: computedStyle, __placeholder: !shouldUpdate }]
+	// a placeholder always need a root and a key, plus we don't need to generate the internal jsonml
+	var root = ['div.item', { __key: i.id, __placeholder: !shouldUpdate, style: computedStyle }]
 	if (shouldUpdate) {
 		root = root.concat([
 			['div',
 				['input', {
 					type: 'text',
 					value: i.color,
-					oninput: reducers.item.colorChange, ref: i
+					oninput: transformers.item.colorChange, ref: i
 				}]
 			],
 			['div',
 				['input', {
 					type: 'range', min: '200', max: '1000',
 					value: new String(i.width),
-					oninput: reducers.item.widthChange, ref: i
+					oninput: transformers.item.widthChange, ref: i
 				}]
 			],
 			['div.content', i.width],
 			['div',
-				['button', { onclick: reducers.item.remove, ref: i }, 'remove']
+				['button', { onclick: transformers.item.remove, ref: i }, 'remove']
 			]
 		])
 	}
@@ -81,20 +81,21 @@ function list(s) {
 }
 
 function menu(s) {
+	// another way to return a root placeholder
 	if (up.check(s.menu)) {
-		return ['span', { key: 'appmenu', __placeholder: false },
+		return ['span', { __key: 'appmenu', __placeholder: false },
 					['div#menu',
-						['input', { oninput: reducers.list.addManyCount, value: s.menu.addManyCount }],
-						['button', { onclick:	reducers.list.addMany },
+						['input', { oninput: transformers.list.addManyCount, value: s.menu.addManyCount }],
+						['button', { onclick: transformers.list.addMany },
 							'add to state.items' + ' (' + s.items.length + ')'
 						],
-						['button', { onclick: reducers.list.flush }, 'flush state.items'],
-						['button', { onclick: reducers.state.flush }, 'flush localStorage.state'],
-						['button', { onclick: reducers.state.animate }, 'animate']
+						['button', { onclick: transformers.list.flush }, 'flush state.items'],
+						['button', { onclick: transformers.state.flush }, 'flush localStorage.state'],
+						['button', { onclick: transformers.state.animate }, 'animate']
 					]
 				]
 	} else {
-		return ['span', { key: 'appmenu', __placeholder: true }]
+		return ['span', { __key: 'appmenu', __placeholder: true }]
 	}
 }
 
