@@ -1,11 +1,12 @@
 import {
+	elementOpenStart,
+	elementOpenEnd,
 	elementClose,
-	elementOpen,
-	elementPlaceholder,
+	attr,
 	text
 } from 'incremental-dom'
 
-function getArgs(head, key) {
+function _openTag(head, key) {
 	let dotSplit = head.split('.')
 	let hashSplit = dotSplit[0].split('#')
 
@@ -13,55 +14,48 @@ function getArgs(head, key) {
 	let id = hashSplit[1]
 	let className = dotSplit.slice(1).join(' ')
 
-	let args = [tagName, key, null]
-
-	if (id || className) {
-		let statics = args[2] = []
-		if (id) {
-			statics.push('id')
-			statics.push(id)
-		}
-		if (className) {
-			statics.push('class')
-			statics.push(className)
-		}
+	if (className) {
+		elementOpenStart(tagName, key, ['id', id, 'class', className])
+	} else {
+		elementOpenStart(tagName, key, ['id', id])
 	}
 
-	return args
+	return tagName
 }
 
 export default function jsonml(markup) {
+	let head = markup[0]
 	let attrsObj = markup[1]
 	let hasAttrs = attrsObj && attrsObj.constructor === Object
 	let key = hasAttrs ? attrsObj.key : null
-	let args = getArgs(markup[0], key)
+
+	let tagName = _openTag(head, key)
 
 	if (hasAttrs) {
-		for (let k in attrsObj) {
-			if (k === 'key') continue
-			args.push(k)
-			args.push(attrsObj[k])
-		}
+		for (let key in attrsObj) {
+			if (key === 'key') {
+				continue
+			}
 
-		if (attrsObj.__placeholder) {
-			elementPlaceholder.apply(null, args)
-			return
+			attr(key, attrsObj[key])
 		}
 	}
 
-	elementOpen.apply(null, args)
+	elementOpenEnd()
 
-	for (let i = hasAttrs ? 2 : 1, len = markup.length, item; i < len; i++) {
-		item = markup[i]
+	for (let i = hasAttrs ? 2 : 1, l = markup.length; i < l; i++) {
+		let node = markup[i]
 
-		if (!item) continue
+		if (node === undefined) {
+			continue
+		}
 
-		if (Array.isArray(item)) {
-			jsonml(item)
+		if (Array.isArray(node)) {
+			_jsonml(node)
 		} else {
-			text(item)
+			text(node)
 		}
 	}
 
-	elementClose(args[0])
+	elementClose(tagName)
 }

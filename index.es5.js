@@ -1,10 +1,13 @@
-var jsonml = function () {
-	var elementOpen = IncrementalDOM.elementOpen
+var jsonml = (function () {
+	"use strict";
+
+	var elementOpenStart = IncrementalDOM.elementOpenStart
+	var elementOpenEnd = IncrementalDOM.elementOpenEnd
 	var elementClose = IncrementalDOM.elementClose
-	var elementPlaceholder = IncrementalDOM.elementPlaceholder
+	var attr = IncrementalDOM.attr
 	var text = IncrementalDOM.text
 
-	function getArgs(head, key) {
+	function _openTag(head, key) {
 		var dotSplit = head.split('.')
 		var hashSplit = dotSplit[0].split('#')
 
@@ -12,58 +15,51 @@ var jsonml = function () {
 		var id = hashSplit[1]
 		var className = dotSplit.slice(1).join(' ')
 
-		var args = [tagName, key, null]
-
-		if (id || className) {
-			var statics = args[2] = []
-			if (id) {
-				statics.push('id')
-				statics.push(id)
-			}
-			if (className) {
-				statics.push('class')
-				statics.push(className)
-			}
+		if (className) {
+			elementOpenStart(tagName, key, ['id', id, 'class', className])
+		} else {
+			elementOpenStart(tagName, key, ['id', id])
 		}
 
-		return args
+		return tagName
 	}
 
 	function _jsonml(markup) {
+		var head = markup[0]
 		var attrsObj = markup[1]
 		var hasAttrs = attrsObj && attrsObj.constructor === Object
 		var key = hasAttrs ? attrsObj.key : null
-		var args = getArgs(markup[0], key)
+
+		var tagName = _openTag(head, key)
 
 		if (hasAttrs) {
-			for (var k in attrsObj) {
-				if (k === 'key') continue
-				args.push(k)
-				args.push(attrsObj[k])
-			}
+			for (var key in attrsObj) {
+				if (key === 'key') {
+					continue
+				}
 
-			if (attrsObj.__placeholder) {
-				elementPlaceholder.apply(null, args)
-				return
+				attr(key, attrsObj[key])
 			}
 		}
 
-		elementOpen.apply(null, args)
+		elementOpenEnd()
 
-		for (var i = hasAttrs ? 2 : 1, len = markup.length, item; i < len; i++) {
-			item = markup[i]
+		for (var i = hasAttrs ? 2 : 1, l = markup.length; i < l; i++) {
+			var node = markup[i]
 
-			if (!item) continue;
+			if (node === undefined) {
+				continue
+			}
 
-			if (Array.isArray(item)) {
-				_jsonml(item)
+			if (Array.isArray(node)) {
+				_jsonml(node)
 			} else {
-				text(item)
+				text(node)
 			}
 		}
 
-		elementClose(args[0])
+		elementClose(tagName)
 	}
 
 	return _jsonml
-}();
+})();
