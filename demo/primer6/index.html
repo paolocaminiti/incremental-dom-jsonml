@@ -61,7 +61,7 @@ function item(i, index) {
 			['div',
 				['input', {
 					type: 'range', min: '200', max: '1000',
-					value: i.width,
+					value: new String(i.width),
 					oninput: reducers.item.widthChange, ref: i
 				}]
 			],
