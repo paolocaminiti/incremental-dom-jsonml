@@ -12,13 +12,9 @@ function _openTag(head, key) {
 
 	let tagName = hashSplit[0] || 'div'
 	let id = hashSplit[1]
-	let className = dotSplit.slice(1).join(' ')
+	let className = dotSplit.length > 1 ? dotSplit.slice(1).join(' ') : undefined
 
-	if (className) {
-		elementOpenStart(tagName, key, ['id', id, 'class', className])
-	} else {
-		elementOpenStart(tagName, key, ['id', id])
-	}
+	elementOpenStart(tagName, key, ['id', id, 'class', className])
 
 	return tagName
 }

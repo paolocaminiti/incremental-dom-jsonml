@@ -13,13 +13,9 @@ var jsonml = (function () {
 
 		var tagName = hashSplit[0] || 'div'
 		var id = hashSplit[1]
-		var className = dotSplit.slice(1).join(' ')
+		var className = dotSplit.length > 1 ? dotSplit.slice(1).join(' ') : undefined
 
-		if (className) {
-			elementOpenStart(tagName, key, ['id', id, 'class', className])
-		} else {
-			elementOpenStart(tagName, key, ['id', id])
-		}
+		elementOpenStart(tagName, key, ['id', id, 'class', className])
 
 		return tagName
 	}
