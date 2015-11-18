@@ -51,7 +51,7 @@ function update() {
 ```
 
 ##### All there is to know about JSONML:
-- A nested array maps 1:1 with your DOM, which indeed really is an XML nested list.
+- A nested array maps 1:1 to your DOM, which indeed really is an XML nested list.
 - Each array describes an element.
 - The head of each array is by convention the tag name.
 - An optional subsequesnt object will contain key value pairs for the attributes.
@@ -60,12 +60,12 @@ function update() {
 ##### Specific to this library:
 - *the head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as [Incremental DOM static properties](http://google.github.io/incremental-dom/#rendering-dom/statics-array). (note that a key should be passed in the attributes to gain benefits from static properties, as of now this library doens't autogenerate one)
 
-- *key/value pairs in the attributes's object * will be assigned as [Incremental DOM dynamic properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties). Here you can dynamically set the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
+- *key/value pairs in the attributes's object* will be assigned as [Incremental DOM dynamic properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties). Here you can dynamically set the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
 
-- *{ __key: value, ... }* assigns an Incremental DOM key to the element
+- *{ __key: value, ... }* attribute assigns an Incremental DOM key to the element
 
 ##### Where is "shouldComponentUpdate"?
-In incremental DOM, branches are skipped when an element is explicitly set as a placeholder using this attribute { __placeholder: true, ... } (note that a key is mandatory for the placeholder).
+In incremental DOM, branches are skipped when an element is explicitly set as a placeholder usinga *{ __placeholder: true, ... }* attribute, the placeholder will act as a root who's descendants are skipped. Note that a key is mandatory for the placeholder. Once a placeholder turns true completely skip the inner jsonml generation.
 
 ##### Application's architecture
 
@@ -90,9 +90,9 @@ Really that's all there is to learn. I suggest reading the, short, [Incremental 
 ##### Further
 
 ##### About this library
-All this library does is making the relevant Incremental DOM calls while traversing your JSONML DOM description.
+All this library does is making the relevant Incremental DOM calls while traversing the JSONML DOM description.
 
-At around 50 loc not only it's lightweight (Incremental DOM itself is < 10kb), it's easily hackable to tailor around any specific need you may encounter in your projects, instead of resorting on weird workarounds.
+At around 50 loc not only it's lightweight (Incremental DOM itself is < 10kb), it's easily hackable to tailor around any specific needs you may encounter in your projects, instead of resorting on weird workarounds.
 
 ##### Tests
 Once i'll settle on how to do it properly along with Incremental DOM.
