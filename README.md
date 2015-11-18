@@ -9,7 +9,7 @@ There's litterally about nothing to learn here, meaning very little risk of fort
 
 Your DOM is expressed by nested arrays as a pure data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, external libraries, ES6 goodness.
 
-Togheter with Incremental DOM allows for in place DOM mutations, which leads to declarative views.
+Togheter with Incremental DOM it allows in place DOM mutations, which leads to declarative views.
 
 ##### Live demos
 
@@ -58,25 +58,28 @@ function update() {
 - All following items in the array are children of the element: arrays again for elements, everything else as text nodes.
 
 ##### Specific to this library:
-*the head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as Incremental DOM static properties.
+- *the head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as [Incremental DOM static properties](http://google.github.io/incremental-dom/#rendering-dom/statics-array). (note that a key should be passed in the attributes to gain benefits from static properties, as of now this library doens't autogenerate one)
 
-*attributes's object key: value pairs* will be assigned as Incremental DOM dynamic properties. Here you can set dynamically the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
+- *key/value pairs in the attributes's object * will be assigned as [Incremental DOM dynamic properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties). Here you can dynamically set the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
 
-*{ __key: value, ... }* assigns an Incremental DOM key to the element
+- *{ __key: value, ... }* assigns an Incremental DOM key to the element
 
 ##### Where is "shouldComponentUpdate"?
-In incremental DOM branches will be skipped when an element is explicitly set as a placeholder, to do so put { __placeholder: true, ... } along with a key in the attribute's object.
+In incremental DOM, branches are skipped when an element is explicitly set as a placeholder using this attribute { __placeholder: true, ... } (note that a key is mandatory for the placeholder).
 
 ##### Application's architecture
 
 ##### Advanced tricks
 style object
+
 new String trick
+
 adding properties to the object
+
 static content 
 
 ##### Learn more
-Really that's all there is to learn. I suggest reading the, short, Incremental DOM documentation and running one of their small examples in the debbuger to get a full picture of what is going on. http://www.jsonml.org/ may also be a source of related usefull infos.
+Really that's all there is to learn. I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debbuger to get a full picture of what is going on. http://www.jsonml.org/ may also be a source of related usefull infos.
 
 ##### Performance considerations
 
