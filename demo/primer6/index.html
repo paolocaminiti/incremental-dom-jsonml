@@ -1,0 +1,130 @@
+<html>
+<head>
+	<style type="text/css">
+		.item {
+			border: 1px solid #000;
+			height: 70px;
+			display: block;
+			padding: 20px;
+			margin: 10px 0;
+		}
+	</style>
+
+	<script src="/node_modules/incremental-dom/dist/incremental-dom-min.js"></script>
+	<script src="/index.es5.js"></script>
+
+	<script src="transformers.js"></script><!-- :) -->
+	<script src="updater.js"></script>
+</head>
+<body>
+	<p>This is a port of <a href="http://binarymuse.github.io/react-primer/build/index.html?6" target="_blank">binarymuse's shouldComponent update demo for React</a>. The idom equivalent is elementPlaceholder, here used as attribute. Animate updates state for head item plus another random item, several ticks are batched before the next animationFrame collects them (the head is always animated to keep chrome's fps stats updating).</p>
+	<div id="approot"></div>
+
+<script>
+"use scrict";
+
+var approot = document.getElementById('approot')
+
+function randomItem() {
+	return {
+		id: Math.random() * Date.now(),
+		width: 200 + Math.floor(Math.random() * 800),
+		color: '#' + Math.random().toString(16).substr(-6)
+	}
+}
+
+// a serializable central state
+var state = {
+	items: [
+		randomItem()
+	],
+	menu: {
+		addManyCount: 1000,
+	}
+}
+
+// fragments
+function item(i, index) {
+	var shouldUpdate = up.check(i)
+	var computedStyle = 'background: ' + i.color + '; width: ' + i.width + 'px';
+
+	// a placeholder always needs a root and a key, plus we don't need to generate the internal jsonml
+	var root = ['div.item', { key: i.id, __placeholder: !shouldUpdate, style: computedStyle }]
+	if (shouldUpdate) {
+		root = root.concat([
+			['div',
+				['input', {
+					type: 'text',
+					value: i.color,
+					oninput: transformers.item.colorChange, ref: i
+				}]
+			],
+			['div',
+				['input', {
+					type: 'range', min: '200', max: '1000',
+					value: new String(i.width),
+					oninput: transformers.item.widthChange, ref: i
+				}]
+			],
+			['div.content', i.width],
+			['div',
+				['button', { onclick: transformers.item.remove, ref: i }, 'remove']
+			]
+		])
+	}
+
+	return root
+}
+
+function list(s) {
+	return ['span'].concat(s.items.map(item))
+}
+
+function menu(s) {
+	// another way to return a root placeholder
+	if (up.check(s.menu)) {
+		return ['span', { key: 'appmenu', __placeholder: false },
+					['div#menu',
+						['input', { oninput: transformers.list.addManyCount, value: s.menu.addManyCount }],
+						['button', { onclick: transformers.list.addMany },
+							'add to state.items' + ' (' + s.items.length + ')'
+						],
+						['button', { onclick: transformers.list.flush }, 'flush state.items'],
+						['button', { onclick: transformers.state.flush }, 'flush localStorage.state'],
+						['button', { onclick: transformers.state.animate }, 'animate']
+					]
+				]
+	} else {
+		return ['span', { key: 'appmenu', __placeholder: true }]
+	}
+}
+
+function app(s) {
+	return ['span',
+				menu(s),
+				list(s)
+			]
+}
+
+// render update
+function update() {
+	function render() {
+		jsonml(app(state))
+	}
+
+	IncrementalDOM.patch(approot, render)
+}
+
+// state persistance
+if (localStorage.state) state = JSON.parse(localStorage.state)
+window.__persistState = true
+window.addEventListener('beforeunload', function () {
+	if (__persistState) localStorage.state = JSON.stringify(state)
+})
+
+// bootstrap updates
+var up = Updater(update)
+up.batch()
+</script>
+</body>
+</html>
