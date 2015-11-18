@@ -58,7 +58,7 @@ function update() {
 - All following items in the array are children of the element: arrays again for elements, everything else as text nodes.
 
 ##### Specific to this library:
-- *the head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as [Incremental DOM static properties](http://google.github.io/incremental-dom/#rendering-dom/statics-array). (note that a key should be passed in the attributes to gain benefits from static properties, as of now this library doens't autogenerate one)
+- *the head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as [Incremental DOM static properties](http://google.github.io/incremental-dom/#rendering-dom/statics-array). (note that a key should be passed in the attributes to gain benefits from static properties, as of now this library doesn't autogenerate one)
 
 - *key/value pairs in the attributes's object* will be assigned as [Incremental DOM dynamic properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties). Here you can dynamically set the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
 
@@ -66,11 +66,6 @@ function update() {
 
 ##### Where is "shouldComponentUpdate"?
 In incremental DOM, branches are skipped when an element is explicitly set as a placeholder usinga *{ __placeholder: true, ... }* attribute. The placeholder will act as a root and descendants are skipped. Note that a key is mandatory for the placeholder. Once a placeholder turns true the inner jsonml generation should be skipped (see the primer6 demo).
-
-##### Application's architecture
-TODO redux
-
-TODO routing
 
 ##### Advanced tricks
 Style attribute can be assigned both as a string or object, [an object will be map directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
@@ -83,6 +78,11 @@ TODO Static content
 
 ##### Learn more
 Really that's all there is to learn. I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debbuger to get a full picture of what is going on. http://www.jsonml.org/ may also be a source of related usefull infos.
+
+##### Application's architecture
+TODO howto redux
+
+TODO howto routing
 
 ##### Performance considerations
 TODO
