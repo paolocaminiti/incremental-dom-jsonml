@@ -29,10 +29,7 @@ export default function jsonml(markup) {
 
 	if (hasAttrs) {
 		for (let k in attrsObj) {
-			if (k === 'key') {
-				continue
-			}
-
+			if (k === 'key') continue
 			attr(k, attrsObj[k])
 		}
 	}
@@ -42,9 +39,7 @@ export default function jsonml(markup) {
 	for (let i = hasAttrs ? 2 : 1, l = markup.length; i < l; i++) {
 		let node = markup[i]
 
-		if (node === undefined) {
-			continue
-		}
+		if (node === undefined) continue
 
 		if (Array.isArray(node)) {
 			_jsonml(node)

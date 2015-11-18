@@ -62,10 +62,12 @@ function update() {
 
 - *key/value pairs in the attributes's object* will be assigned as [Incremental DOM dynamic properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties). Here you can dynamically set the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
 
-- *{ key: value, ... }* attribute assigns an Incremental DOM key to the element
+- *{ key: uniqueKey, ... }* "key" attribute assigns an Incremental DOM key to the element
+
+- *undefined* in any position after the head of the array will just be ignored, allowing easy composition of fragment functions, this removes the dom is not intended to skip rendering.
 
 ##### Where is "shouldComponentUpdate"?
-In incremental DOM, branches are skipped when an element is explicitly set as a placeholder using a *{ __placeholder: true, ... }* attribute. The placeholder will act as a root and descendants are skipped. Note that a key is mandatory for the placeholder. Once a placeholder turns true the inner jsonml generation should be skipped (see the primer6 demo).
+In incremental DOM, rendering branches are skipped when an element is explicitly set as a placeholder using a *{ __placeholder: true, ... }* attribute. The placeholder will act as a root and descendants are skipped. Note that a key is mandatory for the placeholder. Once a placeholder turns true the inner jsonml generation should be skipped (see the primer6 demo).
 
 ##### Advanced tricks
 Style attribute can be assigned both as a string or object, [an object will be map directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).

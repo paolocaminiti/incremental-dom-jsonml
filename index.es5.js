@@ -30,10 +30,7 @@ var jsonml = (function () {
 
 		if (hasAttrs) {
 			for (var k in attrsObj) {
-				if (k === 'key') {
-					continue
-				}
-
+				if (k === 'key') continue
 				attr(k, attrsObj[k])
 			}
 		}
@@ -43,9 +40,7 @@ var jsonml = (function () {
 		for (var i = hasAttrs ? 2 : 1, l = markup.length; i < l; i++) {
 			var node = markup[i]
 
-			if (node === undefined) {
-				continue
-			}
+			if (node === undefined) continue
 
 			if (Array.isArray(node)) {
 				_jsonml(node)
