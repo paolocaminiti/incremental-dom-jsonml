@@ -21,9 +21,9 @@ function item(i, index) {
     console.log(text)
   }
 
-  return ['li,
-    ['.item-class1.item-class2', { style: 'color: blue;' }
-      `item: ${ index } `,
+  return ['li',
+    ['div.class-1.class-2', { style: 'color: blue;' }
+      `item: ${index} `,
       i.text
     ],
     ['button', { onclick: action, stateRef: i }]
@@ -31,11 +31,11 @@ function item(i, index) {
 }
 
 funciton list(state) {
-  return ['ul', state.list.map(item)]
+  return ['ul', ...state.list.map(item)]
 }
 
 function app(state) {
-  return ['div#approt.app', { style: "color: black;" },
+  return ['#approt.app', { style: { color: 'black' } },
     ['p', 'A list in an app'],
     list(state)
   ]
