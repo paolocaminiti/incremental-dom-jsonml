@@ -6,7 +6,7 @@ import {
 	text
 } from 'incremental-dom'
 
-function _openTag(head, __key) {
+function _openTag(head, key) {
 	let dotSplit = head.split('.')
 	let hashSplit = dotSplit[0].split('#')
 
@@ -14,7 +14,7 @@ function _openTag(head, __key) {
 	let id = hashSplit[1]
 	let className = dotSplit.length > 1 ? dotSplit.slice(1).join(' ') : undefined
 
-	elementOpenStart(tagName, __key, ['id', id, 'class', className])
+	elementOpenStart(tagName, key, ['id', id, 'class', className])
 
 	return tagName
 }
@@ -23,13 +23,13 @@ export default function jsonml(markup) {
 	let head = markup[0]
 	let attrsObj = markup[1]
 	let hasAttrs = attrsObj && attrsObj.constructor === Object
-	let __key = hasAttrs ? attrsObj.__key : null
+	let key = hasAttrs ? attrsObj.key : null
 
-	let tagName = _openTag(head, __key)
+	let tagName = _openTag(head, key)
 
 	if (hasAttrs) {
 		for (let k in attrsObj) {
-			if (k === '__key') {
+			if (k === 'key') {
 				continue
 			}
 

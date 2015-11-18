@@ -212,7 +212,7 @@ var reset = function() {
 	function box(i, index) {
 		var count = i.count
 		var boxStyle = 'top: ' + (Math.sin(count / 10) * 10) + 'px; left: ' + (Math.cos(count / 10) * 10) + 'px; background: rgb(0, 0,' + (count % 255) + ')'
-		return ['div.box-view', { __key: index },
+		return ['div.box-view', { key: index },
 					['div.box', { style: boxStyle },
 						count % 100
 					]

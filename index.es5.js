@@ -7,7 +7,7 @@ var jsonml = (function () {
 	var attr = IncrementalDOM.attr
 	var text = IncrementalDOM.text
 
-	function _openTag(head, __key) {
+	function _openTag(head, key) {
 		var dotSplit = head.split('.')
 		var hashSplit = dotSplit[0].split('#')
 
@@ -15,7 +15,7 @@ var jsonml = (function () {
 		var id = hashSplit[1]
 		var className = dotSplit.length > 1 ? dotSplit.slice(1).join(' ') : undefined
 
-		elementOpenStart(tagName, __key, ['id', id, 'class', className])
+		elementOpenStart(tagName, key, ['id', id, 'class', className])
 
 		return tagName
 	}
@@ -24,13 +24,13 @@ var jsonml = (function () {
 		var head = markup[0]
 		var attrsObj = markup[1]
 		var hasAttrs = attrsObj && attrsObj.constructor === Object
-		var __key = hasAttrs ? attrsObj.__key : null
+		var key = hasAttrs ? attrsObj.key : null
 
-		var tagName = _openTag(head, __key)
+		var tagName = _openTag(head, key)
 
 		if (hasAttrs) {
 			for (var k in attrsObj) {
-				if (k === '__key') {
+				if (k === 'key') {
 					continue
 				}
 

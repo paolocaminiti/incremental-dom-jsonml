@@ -21,7 +21,7 @@ function item(i, index) {
     console.log(text)
   }
 
-  return ['li, 
+  return ['li,
     ['.item-class1.item-class2', { style: 'color: blue;' }
       `item: ${ index } `,
       i.text
@@ -62,46 +62,48 @@ function update() {
 
 - *key/value pairs in the attributes's object* will be assigned as [Incremental DOM dynamic properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties). Here you can dynamically set the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
 
-- *{ __key: value, ... }* attribute assigns an Incremental DOM key to the element
+- *{ key: value, ... }* attribute assigns an Incremental DOM key to the element
 
 ##### Where is "shouldComponentUpdate"?
-In incremental DOM, branches are skipped when an element is explicitly set as a placeholder usinga *{ __placeholder: true, ... }* attribute, the placeholder will act as a root who's descendants are skipped. Note that a key is mandatory for the placeholder. Once a placeholder turns true completely skip the inner jsonml generation.
+In incremental DOM, branches are skipped when an element is explicitly set as a placeholder usinga *{ __placeholder: true, ... }* attribute. The placeholder will act as a root and descendants are skipped. Note that a key is mandatory for the placeholder. Once a placeholder turns true the inner jsonml generation should be skipped (see the primer6 demo).
 
 ##### Application's architecture
+TODO redux
+
+TODO routing
 
 ##### Advanced tricks
-style object
+Style attribute can be assigned both as a string or object, [an object will be map directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
 
-new String trick
+When you want to coherce a string or number to be assigned as a property instead of an attribute create a new instance of it *{ inputValueName: new String(value), ... }*.
 
-adding properties to the object
+By assigning objects to element's properties arbitrary data can be added to the elements, this is expecially usefull in event handling.
 
-static content 
+TODO Static content
 
 ##### Learn more
 Really that's all there is to learn. I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debbuger to get a full picture of what is going on. http://www.jsonml.org/ may also be a source of related usefull infos.
 
 ##### Performance considerations
+TODO
 
 ##### What's it good for?
+TODO
 
 ##### Server side rendering
+[Look here for experiments](https://github.com/paolocaminiti/incremental-dom-to-string) in this direction, turns out Incremental DOM API is really simple to map to string output.
 
 ##### Further
+TODO
 
 ##### About this library
 All this library does is making the relevant Incremental DOM calls while traversing the JSONML DOM description.
 
 At around 50 loc not only it's lightweight (Incremental DOM itself is < 10kb), it's easily hackable to tailor around any specific needs you may encounter in your projects, instead of resorting on weird workarounds.
 
+There are lots of ways to use Incremental DOM methods and I tried out many, the code published here is and will be changed accordingly to be the simplest and most performant I can come with.
+
+The stability of the JSONML format somewhat protects from Incremental DOM experimental status, still things like *key* *__placeholder* *statics/dynamic properties* assignment are subject to vary.
+
 ##### Tests
-Once i'll settle on how to do it properly along with Incremental DOM.
-
-
-
-
-
-
-
-
-.
+Once I settle on how to do it properly along with Incremental DOM.

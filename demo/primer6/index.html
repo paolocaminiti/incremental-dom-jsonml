@@ -48,8 +48,8 @@ function item(i, index) {
 	var shouldUpdate = up.check(i)
 	var computedStyle = 'background: ' + i.color + '; width: ' + i.width + 'px';
 
-	// a placeholder always need a root and a key, plus we don't need to generate the internal jsonml
-	var root = ['div.item', { __key: i.id, __placeholder: !shouldUpdate, style: computedStyle }]
+	// a placeholder always needs a root and a key, plus we don't need to generate the internal jsonml
+	var root = ['div.item', { key: i.id, __placeholder: !shouldUpdate, style: computedStyle }]
 	if (shouldUpdate) {
 		root = root.concat([
 			['div',
@@ -83,7 +83,7 @@ function list(s) {
 function menu(s) {
 	// another way to return a root placeholder
 	if (up.check(s.menu)) {
-		return ['span', { __key: 'appmenu', __placeholder: false },
+		return ['span', { key: 'appmenu', __placeholder: false },
 					['div#menu',
 						['input', { oninput: transformers.list.addManyCount, value: s.menu.addManyCount }],
 						['button', { onclick: transformers.list.addMany },
@@ -95,7 +95,7 @@ function menu(s) {
 					]
 				]
 	} else {
-		return ['span', { __key: 'appmenu', __placeholder: true }]
+		return ['span', { key: 'appmenu', __placeholder: true }]
 	}
 }
 
