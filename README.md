@@ -12,6 +12,7 @@ Your DOM is expressed by nested arrays as a pure data structure. You can compose
 Togheter with Incremental DOM it allows in place DOM mutations, which leads to declarative views.
 
 ##### Live demos
+[link](http://paolocaminiti.github.io/incremental-dom-jsonml/)
 
 ##### Basic usage
 ```
