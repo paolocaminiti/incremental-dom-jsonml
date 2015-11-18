@@ -82,10 +82,12 @@ The stability of the JSONML format somewhat protects from Incremental DOM experi
 ##### Learn more
 Really that's all there is to learn. I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debbuger to get a full picture of what is going on. http://www.jsonml.org/ may also be a source of related usefull infos.
 
+##### Opinions
+
 ##### Application's architecture
 TODO howto redux
 
-##### Routing opinions
+##### Routing
 TODO howto routing
 
 ##### Performance considerations
