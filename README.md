@@ -77,7 +77,7 @@ By assigning objects to element's properties arbitrary data can be added to the 
 TODO Static content
 
 ##### Incremental DOM is still experimental
-The stability of the JSONML format somewhat protects from Incremental DOM experimental status, still things like *key*, *__placeholder*, *statics/dynamic properties* assignment, and eventual new features or better understanding are subject to vary this repo.
+The stability of the JSONML format somewhat protects from Incremental DOM experimental status, still things like *key*, *__placeholder*, *statics/dynamic properties* assignment, and eventual new features or better understanding may vary this repo.
 
 ##### Learn more
 Really that's all there is to learn. I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debbuger to get a full picture of what is going on. http://www.jsonml.org/ may also be a source of related usefull infos.
