@@ -10,20 +10,7 @@ There's litterally about nothing to learn here, meaning very little risk of fort
 
 Your DOM is expressed by nested arrays as a pure data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, to external libraries, to ES6 goodness
 
-Using it togheter with Incremental DOM allows for in place DOM mutations, which leads to declarative views.
-
-All this library does is making the relevant Incremental DOM calls while traversing your JSONML DOM description.
-
-At around 50 loc not only it's lightweight (Incremental DOM itself is < 10kb), it's easily hackable to tailor around any specific need you may encounter in your projects, instead of resorting on weird workarounds.
-
-##### All there is to know about JSONML:
-- A nested array maps 1:1 with your DOM, which indeed really is an XML nested list.
-- Each array describes an element.
-- The head of each array is by convention the tag name.
-- An optional subsequesnt object will contain all the key value map of the attributes, if any.
-- All following items in the array are children of the element, primitive values for text nodes, arrays again for elements.
-
-##### Usage
+##### Basic Usage
 ```
 function item(i, index) {
   function action (e) {
@@ -60,17 +47,44 @@ function update() {
 }
 ```
 
-##### The head of the array
-Must be a string. Can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as Incremental DOM static properties.
+##### All there is to know about JSONML:
+- A nested array maps 1:1 with your DOM, which indeed really is an XML nested list.
+- Each array describes an element.
+- The head of each array is by convention the tag name.
+- An optional subsequesnt object will contain all the key value map of the attributes, if any.
+- All following items in the array are children of the element, primitive values for text nodes, arrays again for elements.
 
-##### The attributes's object
-All key value pairs will be assigned as Incremental DOM dynamic properties. Here you can set dinamically the id and classes as { id: 'id', class: 'class1 class2', ... }.
+Using it togheter with Incremental DOM allows for in place DOM mutations, which leads to declarative views.
 
-##### Assigning an Incremental DOM key to an element
-{ __key: value, ...} assigns an Incremental DOM key to an element
+##### Specific to this library:
+*head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as Incremental DOM static properties.
+
+*attributes's object* key: value pairs will be assigned as Incremental DOM dynamic properties. Here you can set dinamically the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
+
+*{ __key: value, ...}* assigns an Incremental DOM key to the element
 
 ##### Where is "shouldComponentUpdate"?
 In incremental DOM branches will be skipped when an element is explicitly set as a placeholder, to do so (along with a key) put { __placeholder: true, ... } in the attribute's object.
+
+##### Application's architecture
+
+##### Performance considerations
+
+##### Demos
+
+##### About this library
+All this library does is making the relevant Incremental DOM calls while traversing your JSONML DOM description.
+
+At around 50 loc not only it's lightweight (Incremental DOM itself is < 10kb), it's easily hackable to tailor around any specific need you may encounter in your projects, instead of resorting on weird workarounds.
+
+##### Tests
+Once i'll settle on how to do it properly along with Incremental DOM i'll provide tests.
+
+
+
+
+
+
 
 
 .
