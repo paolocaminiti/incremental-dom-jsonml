@@ -1,14 +1,13 @@
-# Because your DOM ain't nothing but a nested list!
+## Because your DOM ain't nothing but a nested list!
 
 ##### No, seriously, why JSONML...
 - there's nothing fancy about it, not even the name.
-- there's no syntax to learn, no arbitrary semantic overhead either.
-- there's no transpiler, no runtime parser.
+- there's no syntax to learn, no arbitrary semantics overhead either.
 - there's no directives, factories, superheros, added magic or atomic science.
 
 There's litterally about nothing to learn here, meaning very little risk of forthcoming obsolescence. The fine art of lists composition has been around forever, jsonml quite a while as well.
 
-Your DOM is expressed by nested arrays as a pure data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, to external libraries, to ES6 goodness
+Your DOM is expressed by nested arrays as a pure data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, external libraries, ES6 goodness.
 
 Togheter with Incremental DOM allows for in place DOM mutations, which leads to declarative views.
 
@@ -55,13 +54,13 @@ function update() {
 - A nested array maps 1:1 with your DOM, which indeed really is an XML nested list.
 - Each array describes an element.
 - The head of each array is by convention the tag name.
-- An optional subsequesnt object will contain all the key value map of the attributes, if any.
-- All following items in the array are children of the element, primitive values for text nodes, arrays again for elements.
+- An optional subsequesnt object will contain key value pairs for the attributes.
+- All following items in the array are children of the element: arrays again for elements, everything else as text nodes.
 
 ##### Specific to this library:
-*head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as Incremental DOM static properties.
+*the head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as Incremental DOM static properties.
 
-*attributes's object key: value pairs* will be assigned as Incremental DOM dynamic properties. Here you can set dinamically the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
+*attributes's object key: value pairs* will be assigned as Incremental DOM dynamic properties. Here you can set dynamically the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
 
 *{ __key: value, ... }* assigns an Incremental DOM key to the element
 
@@ -71,8 +70,21 @@ In incremental DOM branches will be skipped when an element is explicitly set as
 ##### Application's architecture
 
 ##### Advanced tricks
+style object
+new String trick
+adding properties to the object
+static content 
+
+##### Learn more
+Really that's all there is to learn. I suggest reading the, short, Incremental DOM documentation and running one of their small examples in the debbuger to get a full picture of what is going on. http://www.jsonml.org/ may also be a source of related usefull infos.
 
 ##### Performance considerations
+
+##### What's it good for?
+
+##### Server side rendering
+
+##### Further
 
 ##### About this library
 All this library does is making the relevant Incremental DOM calls while traversing your JSONML DOM description.
@@ -80,7 +92,7 @@ All this library does is making the relevant Incremental DOM calls while travers
 At around 50 loc not only it's lightweight (Incremental DOM itself is < 10kb), it's easily hackable to tailor around any specific need you may encounter in your projects, instead of resorting on weird workarounds.
 
 ##### Tests
-Once i'll settle on how to do it properly along with Incremental DOM i'll provide tests.
+Once i'll settle on how to do it properly along with Incremental DOM.
 
 
 
