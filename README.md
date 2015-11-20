@@ -61,9 +61,11 @@ function update() {
 ##### Specific to this library
 The *head of the array* accepts css syntax for id and classes 'div#id.class1.class2' and defaults to DIV.
 
-*{ _key: uniqueKey, ... }* attribute assigns an Incremental DOM key to the element.
-
 Children positions containing falsy values are just ignored, this simplifies composition by allowing fragment functions to return undefined.
+
+Attributes values of type Object or Function will be [assigned as properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties) of the element.
+
+*{ _key: uniqueKey, ... }* attribute assigns an Incremental DOM key to the element.
 
 ##### Where is *shouldComponentUpdate*?
 *{ _skip: true, ... }* on an element will tell Incremental DOM to skip diffing it's descendants and resume traversal. This effectively let's you treat an element as a "component" root that doesn't need any update. Element _key is mandatory in this case. (See primer6 demo for possible usage).
@@ -71,7 +73,7 @@ Children positions containing falsy values are just ignored, this simplifies com
 ##### Advanced tricks
 Style attribute can be assigned both as a string or an object, [an object being mapped directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
 
-By assigning objects to element's properties arbitrary data can be added to the elements, this is expecially usefull in event handling.
+By assigning objects to element's properties arbitrary data, other than standard properties, can be added to any element, this is expecially usefull in event handling.
 
 When you want to coherce a string or number to be assigned as a property instead of an attribute create a new instance of it *{ inputValueName: new String(value), ... }*.
 
@@ -84,7 +86,9 @@ I suggest reading the, short, [Incremental DOM documentation](http://google.gith
 
 [http://www.jsonml.org/](http://www.jsonml.org/) may also be a source of related usefull infos.
 
-BTW the library plays just fine with [Redux](https://github.com/rackt/redux), an exmaple is coming.
+BTW the library plays just fine with [Redux](https://github.com/rackt/redux), an example is coming.
+
+Browser compatibility is just the same as Incremental DOM itself, which by now seems to target IE9.
 
 ### Opinions
 
