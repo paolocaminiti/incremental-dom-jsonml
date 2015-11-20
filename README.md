@@ -59,16 +59,16 @@ function update() {
 - All following items in the array are children of the element: arrays again for elements, everything else as text nodes.
 
 ##### Specific to this library
-- *the head of the array* accepts css syntax for id and classes 'div#id.class1.class2' and defaults to DIV.
+The *head of the array* accepts css syntax for id and classes 'div#id.class1.class2' and defaults to DIV.
 
-- *{ _key: uniqueKey, ... }* attribute assigns an Incremental DOM key to the element.
+*{ _key: uniqueKey, ... }* attribute assigns an Incremental DOM key to the element.
 
-- children positions containing falsy values are just ignored, this simplifies composition by allowing fragment functions to return undefined.
+Children positions containing falsy values are just ignored, this simplifies composition by allowing fragment functions to return undefined.
 
-- only on attributes object can be found at position 1 of the element's array, this differs from standard jsonml where multiple attributes objects can be scattered anywhere after the head.
+Only one attributes object at position 1 of the element's array is allowed. This is the only incompatibility with standard jsonml where multiple attributes objects can be scattered anywhere after the head (implementing this with Incremental DOM would be a performance hit on long child lists, and frankly i never found a real need for it).
 
-##### Where is "shouldComponentUpdate"?
-*{ _skip: true }* on an element will tell Incremental DOM to skip diffing it's descendants and resume traversal. This effectively let's you treat an element as a "component" root that doesn't need any update (see primer6 demo for possible usage).
+##### Where is *shouldComponentUpdate*?
+*{ _skip: true }* on an element will tell Incremental DOM to skip diffing it's descendants and resume traversal. This effectively let's you treat an element as a "component" root that doesn't need any update. Note that a _key is needed for _skip to work properly. (See primer6 demo for possible usage).
 
 ##### Advanced tricks
 Style attribute can be assigned both as a string or an object, [an object being mapped directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
