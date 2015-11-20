@@ -42,12 +42,8 @@ function app(state) {
   ]
 }
 
-function render(state) {
-  jsonml(app(state))
-}
-
 function update() {
-  IncrementalDOM.patch(node, render, state)
+  IncrementalDOM.patch(node, jsonml, app(state))
 }
 ```
 
