@@ -57,9 +57,11 @@ var reset = function() {
 		}
 	});
 
+	var range;
+
 	var BoxesView = React.createClass({
 		render: function() {
-			var boxes = _.map(_.range(N), function(i) {
+			var boxes = range.map(function(i) {
 				return BoxView({key: i, count: this.props.count});
 			}, this);
 			return React.DOM.div(null, boxes);
@@ -68,6 +70,7 @@ var reset = function() {
 
 	var counter;
 	var reactInit = function() {
+		range = _.range(N);
 		counter = -1;
 		reactAnimate();
 	};
