@@ -65,8 +65,6 @@ The *head of the array* accepts css syntax for id and classes 'div#id.class1.cla
 
 Children positions containing falsy values are just ignored, this simplifies composition by allowing fragment functions to return undefined.
 
-Only one attributes object at position 1 of the element's array is allowed. This is the only incompatibility with standard jsonml where multiple attributes objects can be scattered anywhere after the head (implementing this with Incremental DOM would be a performance hit on long child lists, and frankly i never found a real need for it).
-
 ##### Where is *shouldComponentUpdate*?
 *{ _skip: true, ... }* on an element will tell Incremental DOM to skip diffing it's descendants and resume traversal. This effectively let's you treat an element as a "component" root that doesn't need any update. Element _key is mandatory in this case. (See primer6 demo for possible usage).
 
@@ -92,6 +90,9 @@ BTW the library plays just fine with [Redux](https://github.com/rackt/redux), an
 
 ##### Incremental DOM is still experimental
 The stability of the JSONML format somewhat protects from Incremental DOM experimental status. Still things like *_key*, *_skip*, *statics/dynamic properties* assignment, and eventual new features or better understanding may vary this repo.
+
+##### Compatibility with standard jsonml code
+Only one attributes object at position 1 of the element's array is allowed. This is the only incompatibility with standard jsonml where multiple attributes objects can be scattered anywhere after the head. Implementing this with Incremental DOM would be a performance hit on long child lists, and frankly i never used it.
 
 ##### Routing
 TODO Howto routing
