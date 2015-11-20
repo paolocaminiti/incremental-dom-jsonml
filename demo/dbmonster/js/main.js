@@ -61,7 +61,7 @@ function dbRow(db) {
   var topFiveQueries = db.getTopFiveQueries();
   var count = db.queries.length;
 
-  return ['tr', { key: db.id },
+  return ['tr', { _key: db.id },
     ['td.dbname', db.name],
     ['td.query-count',
       ['span', { class: labelClass(count) },
