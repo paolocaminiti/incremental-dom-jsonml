@@ -19,7 +19,7 @@ Togheter with Incremental DOM it allows in place DOM mutations, which leads to d
 [primer6](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/primer6), *shouldComponentUpdate* equivalent.
 
 ##### Basic usage
-```
+```javascript
 function item(i, index) {
   function action (e) {
     var text = e.target.stateRef.text
@@ -35,7 +35,7 @@ function item(i, index) {
   ]
 }
 
-funciton list(state) {
+function list(state) {
   return ['ul', ...state.list.map(item)]
 }
 
