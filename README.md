@@ -12,11 +12,11 @@ Your DOM is expressed by nested arrays as a pure data structure. You can compose
 Togheter with Incremental DOM it allows in place DOM mutations, which leads to declarative views.
 
 ##### Live demos
-[circles](http://paolocaminiti.github.io/incremental-dom-jsonml/circles), benchmark.
+[circles](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/circles), benchmark.
 
-[dbmonster](http://paolocaminiti.github.io/incremental-dom-jsonml/dbmonster), benchmark.
+[dbmonster](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/dbmonster), benchmark.
 
-[primer6](http://paolocaminiti.github.io/incremental-dom-jsonml/primer6), *shouldComponentUpdate* equivalent.
+[primer6](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/primer6), *shouldComponentUpdate* equivalent.
 
 ##### Basic usage
 ```
