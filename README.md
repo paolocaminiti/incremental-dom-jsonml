@@ -77,7 +77,7 @@ When you want to coherce a string or number to be assigned as a property instead
 
 TODO Mixing static content
 
-##### Learn more
+### Learn more
 Really that's all there is to learn.
 
 I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debugger to get a full picture of what is going on.
