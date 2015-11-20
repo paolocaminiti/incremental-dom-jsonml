@@ -2,49 +2,60 @@ import {
 	elementOpenStart,
 	elementOpenEnd,
 	elementClose,
+	skip,
 	attr,
 	text
 } from 'incremental-dom'
 
-function _openTag(head, key) {
+function _openTag(head, _key) {
 	let dotSplit = head.split('.')
 	let hashSplit = dotSplit[0].split('#')
 
 	let tagName = hashSplit[0] || 'div'
 	let id = hashSplit[1]
-	let className = dotSplit.length > 1 ? dotSplit.slice(1).join(' ') : undefined
+	let className = dotSplit.slice(1).join(' ')
 
-	elementOpenStart(tagName, key, ['id', id, 'class', className])
+	elementOpenStart(tagName, _key)
+	if (id) attr('id', id)
+	if (className) attr('class', className)
 
 	return tagName
+}
+
+function _applyAttrsObj(attrsObj) {
+	for (let k in attrsObj) {
+		if (k === '_key' || k === '_skip') continue
+		attr(k, attrsObj[k])
+	}
 }
 
 export default function jsonml(markup) {
 	let head = markup[0]
 	let attrsObj = markup[1]
 	let hasAttrs = attrsObj && attrsObj.constructor === Object
-	let key = hasAttrs ? attrsObj.key : null
+	let firstChildPos = hasAttrs ? 2 : 1
+	let _key = hasAttrs && attrsObj._key
+	let _skip = hasAttrs && attrsObj._skip
 
-	let tagName = _openTag(head, key)
+	let tagName = _openTag(head, _key)
 
-	if (hasAttrs) {
-		for (let k in attrsObj) {
-			if (k === 'key') continue
-			attr(k, attrsObj[k])
-		}
-	}
+	if (hasAttrs) _applyAttrsObj(attrsObj)
 
 	elementOpenEnd()
 
-	for (let i = hasAttrs ? 2 : 1, l = markup.length; i < l; i++) {
-		let node = markup[i]
+	if (_skip) {
+		skip()
+	} else {
+		for (let i = firstChildPos, len = markup.length; i < len; i++) {
+			let node = markup[i]
 
-		if (node === undefined) continue
+			if (!node) continue
 
-		if (Array.isArray(node)) {
-			_jsonml(node)
-		} else {
-			text(node)
+			if (Array.isArray(node)) {
+				_jsonml(node)
+			} else {
+				text(node)
+			}
 		}
 	}
 

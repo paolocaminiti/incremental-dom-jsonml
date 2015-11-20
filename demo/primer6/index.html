@@ -10,7 +10,8 @@
 		}
 	</style>
 
-	<script src="../../node_modules/incremental-dom/dist/incremental-dom-min.js"></script>
+	<!--<script src="../../node_modules/incremental-dom/dist/incremental-dom-min.js"></script>-->
+	<script src="../../dependencies/incremental-dom/dist/incremental-dom-min.js"></script>
 	<script src="../../index.es5.js"></script>
 
 	<script src="transformers.js"></script><!-- :) -->
@@ -44,75 +45,59 @@ var state = {
 }
 
 // fragments
-function item(i, index) {
+function item(i) {
 	var shouldUpdate = up.check(i)
 	var computedStyle = 'background: ' + i.color + '; width: ' + i.width + 'px';
 
-	// a placeholder always needs a root and a key, plus we don't need to generate the internal jsonml
-	var root = ['div.item', { key: i.id, __placeholder: !shouldUpdate, style: computedStyle }]
-	if (shouldUpdate) {
-		root = root.concat([
-			['div',
-				['input', {
-					type: 'text',
-					value: i.color,
-					oninput: transformers.item.colorChange, ref: i
-				}]
-			],
-			['div',
-				['input', {
-					type: 'range', min: '200', max: '1000',
-					value: new String(i.width),
-					oninput: transformers.item.widthChange, ref: i
-				}]
-			],
-			['div.content', i.width],
-			['div',
-				['button', { onclick: transformers.item.remove, ref: i }, 'remove']
-			]
-		])
-	}
-
-	return root
+	return ['span', { _key: i.id, _skip: !shouldUpdate }].concat(shouldUpdate && [
+				['div.item', { style: computedStyle },
+					['div',
+						['input', {
+							type: 'text',
+							value: i.color,
+							oninput: transformers.item.colorChange, ref: i
+						}]
+					],
+					['div',
+						['input', {
+							type: 'range', min: '200', max: '1000',
+							value: new String(i.width),
+							oninput: transformers.item.widthChange, ref: i
+						}]
+					],
+					['div.content', i.width],
+					['div',
+						['button', { onclick: transformers.item.remove, ref: i }, 'remove']
+					]
+				]
+			])
 }
 
 function list(s) {
-	return ['span'].concat(s.items.map(item))
+	return s.items.map(item)
 }
 
 function menu(s) {
-	// another way to return a root placeholder
-	if (up.check(s.menu)) {
-		return ['span', { key: 'appmenu', __placeholder: false },
-					['div#menu',
-						['input', { oninput: transformers.list.addManyCount, value: s.menu.addManyCount }],
-						['button', { onclick: transformers.list.addMany },
-							'add to state.items' + ' (' + s.items.length + ')'
-						],
-						['button', { onclick: transformers.list.flush }, 'flush state.items'],
-						['button', { onclick: transformers.state.flush }, 'flush localStorage.state'],
-						['button', { onclick: transformers.state.animate }, 'animate']
-					]
-				]
-	} else {
-		return ['span', { key: 'appmenu', __placeholder: true }]
-	}
+	var shouldUpdate = up.check(s.menu)
+
+	return ['div#menu', { _key: 'appmenu', _skip: !shouldUpdate }].concat(shouldUpdate && [
+				['input', { oninput: transformers.list.addManyCount, value: s.menu.addManyCount }],
+				['button', { onclick: transformers.list.addMany },
+					'add to state.items' + ' (' + s.items.length + ')'
+				],
+				['button', { onclick: transformers.list.flush }, 'flush state.items'],
+				['button', { onclick: transformers.state.flush }, 'flush localStorage.state'],
+				['button', { onclick: transformers.state.animate }, 'animate']
+			])
 }
 
 function app(s) {
-	return ['span',
-				menu(s),
-				list(s)
-			]
+	return ['span',	menu(s)].concat(list(s))
 }
 
 // render update
 function update() {
-	function render() {
-		jsonml(app(state))
-	}
-
-	IncrementalDOM.patch(approot, render)
+	IncrementalDOM.patch(approot, jsonml, app(state))
 }
 
 // state persistance

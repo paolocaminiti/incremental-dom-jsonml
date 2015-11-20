@@ -168,9 +168,9 @@ var reset = function() {
 	}
 
 	function render(s) {
-		elementOpen('div')
+		//elementOpen('div')
 			s.boxes.map(box)
-		elementClose('div')
+		//elementClose('div')
 	}
 
 	function update() {
@@ -212,7 +212,7 @@ var reset = function() {
 	function box(i, index) {
 		var count = i.count
 		var boxStyle = 'top: ' + (Math.sin(count / 10) * 10) + 'px; left: ' + (Math.cos(count / 10) * 10) + 'px; background: rgb(0, 0,' + (count % 255) + ')'
-		return ['div.box-view', { key: index },
+		return ['div.box-view', { _key: index },
 					['div.box', { style: boxStyle },
 						count % 100
 					]
@@ -220,7 +220,7 @@ var reset = function() {
 	}
 
 	function app(s) {
-		return ['div'].concat(s.boxes.map(box))
+		return ['span'].concat(s.boxes.map(box))
 	}
 
 	function render(s) {
