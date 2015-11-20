@@ -1,6 +1,6 @@
 ## Because your DOM ain't nothing but a nested list!
 
-##### No, seriously, why JSONML...
+#### No, seriously, why JSONML...
 - there's nothing fancy about it, not even the name.
 - there's no syntax to learn, no arbitrary semantics overhead either.
 - there's no directives, factories, superheros, added magic or atomic science.
@@ -12,7 +12,11 @@ Your DOM is expressed by nested arrays as a pure data structure. You can compose
 Togheter with Incremental DOM it allows in place DOM mutations, which leads to declarative views.
 
 ##### Live demos
-[link](http://paolocaminiti.github.io/incremental-dom-jsonml/)
+[circles](http://paolocaminiti.github.io/incremental-dom-jsonml/circles), benchmark.
+
+[dbmonster](http://paolocaminiti.github.io/incremental-dom-jsonml/dbmonster), benchmark.
+
+[primer6](http://paolocaminiti.github.io/incremental-dom-jsonml/primer6), *shouldComponentUpdate* equivalent.
 
 ##### Basic usage
 ```
@@ -48,46 +52,49 @@ function update() {
 ```
 
 ##### All there is to know about JSONML
-- A nested array maps 1:1 to your DOM, which indeed really is an XML nested list.
+- A nested array maps 1:1 to your DOM.
 - Each array describes an element.
 - The head of each array is by convention the tag name.
-- An optional subsequesnt object will contain key value pairs for the attributes.
+- An optional subsequesnt object will contain key/value pairs for the attributes.
 - All following items in the array are children of the element: arrays again for elements, everything else as text nodes.
 
 ##### Specific to this library
-- *the head of the array* can contain css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Where present id and classes will be assigned as [Incremental DOM static properties](http://google.github.io/incremental-dom/#rendering-dom/statics-array). (note that a key should be passed in the attributes to gain benefits from static properties, as of now this library doesn't autogenerate one)
+- *the head of the array* accepts css syntax for id and classes 'div#id.class1.class2' and defaults to DIV.
 
-- *key/value pairs in the attributes's object* will be assigned as [Incremental DOM dynamic properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties). Here you can dynamically set the id and classes as { id: 'id', class: 'class1 class2', ... }. Incremental DOM will use String and Number as attributes, Object as an element property.
+- *{ _key: uniqueKey, ... }* attribute assigns an Incremental DOM key to the element.
 
-- *{ key: uniqueKey, ... }* "key" attribute assigns an Incremental DOM key to the element
+- children positions containing falsy values are just ignored, this simplifies composition by allowing fragment functions to return undefined.
 
-- *undefined* in any position after the head of the array will just be ignored, allowing easy composition of fragment functions, this removes the dom is not intended to skip rendering.
+- only on attributes object can be found at position 1 of the element's array, this differs from standard jsonml where multiple attributes objects can be scattered anywhere after the head.
 
 ##### Where is "shouldComponentUpdate"?
-In incremental DOM, rendering branches are skipped when an element is explicitly set as a placeholder using a *{ __placeholder: true, ... }* attribute. The placeholder will act as a root and descendants are skipped. Note that a key is mandatory for the placeholder. Once a placeholder turns true the inner jsonml generation should be skipped (see the primer6 demo).
+*{ _skip: true }* on an element will tell Incremental DOM to skip diffing it's descendants and resume traversal. This effectively let's you treat an element as a "component" root that doesn't need any update (see primer6 demo for possible usage).
 
 ##### Advanced tricks
-Style attribute can be assigned both as a string or object, [an object will be map directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
-
-When you want to coherce a string or number to be assigned as a property instead of an attribute create a new instance of it *{ inputValueName: new String(value), ... }*.
+Style attribute can be assigned both as a string or an object, [an object being mapped directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
 
 By assigning objects to element's properties arbitrary data can be added to the elements, this is expecially usefull in event handling.
 
-TODO Static content
+When you want to coherce a string or number to be assigned as a property instead of an attribute create a new instance of it *{ inputValueName: new String(value), ... }*.
 
-##### Incremental DOM is still experimental
-The stability of the JSONML format somewhat protects from Incremental DOM experimental status, still things like *key*, *__placeholder*, *statics/dynamic properties* assignment, and eventual new features or better understanding may vary this repo.
+TODO Mixing static content
 
 ##### Learn more
-Really that's all there is to learn. I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debbuger to get a full picture of what is going on. http://www.jsonml.org/ may also be a source of related usefull infos.
+Really that's all there is to learn.
 
-##### Opinions
+I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debugger to get a full picture of what is going on.
 
-##### Application's architecture
-TODO howto redux
+[http://www.jsonml.org/](http://www.jsonml.org/) may also be a source of related usefull infos.
+
+BTW the library plays just fine with [Redux](https://github.com/rackt/redux), an exmaple is coming.
+
+### Opinions
+
+##### Incremental DOM is still experimental
+The stability of the JSONML format somewhat protects from Incremental DOM experimental status. Still things like *_key*, *_skip*, *statics/dynamic properties* assignment, and eventual new features or better understanding may vary this repo.
 
 ##### Routing
-TODO howto routing
+TODO Howto routing
 
 ##### Performance considerations
 TODO
