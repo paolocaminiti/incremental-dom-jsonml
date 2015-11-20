@@ -52,7 +52,7 @@ export default function jsonml(markup) {
 			if (!node) continue
 
 			if (Array.isArray(node)) {
-				_jsonml(node)
+				jsonml(node)
 			} else {
 				text(node)
 			}
