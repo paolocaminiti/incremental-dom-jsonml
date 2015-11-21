@@ -18,6 +18,8 @@
 </head>
 <body>
 	<p>This is a port of <a href="http://binarymuse.github.io/react-primer/build/index.html?6" target="_blank">binarymuse's shouldComponent update demo for React</a>. The idom equivalent is elementPlaceholder, here used as attribute. Animate updates state for head item plus another random item, several ticks are batched before the next animationFrame collects them (the head is always animated to keep chrome's fps stats updating).</p>
+	<p><strong>Since Chrome 46 creating more than 100 range inputs on touch enabled devices will destroy performance, to restore smooth performance temporarily turn off "Enable touch events" in chrome://flags, this applies to both the original demo and this jsonml port.</strong></p>
+
 	<div id="approot"></div>
 
 <script>
