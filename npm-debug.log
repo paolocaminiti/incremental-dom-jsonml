@@ -1,0 +1,100 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@3.3.6
+3 info using node@v5.0.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'C:\\Users\\Surface Pro 3\\Desktop\\git\\incremental-dom-jsonml',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\Surface Pro 3\AppData\Roaming\npm-cache\incremental-dom-jsonml\0.0.1\package.tgz not in flight; packing
+9 info lifecycle incremental-dom-jsonml@0.0.1~prepublish: incremental-dom-jsonml@0.0.1
+10 silly lifecycle incremental-dom-jsonml@0.0.1~prepublish: no script for prepublish, continuing
+11 verbose tar pack [ 'C:\\Users\\Surface Pro 3\\AppData\\Roaming\\npm-cache\\incremental-dom-jsonml\\0.0.1\\package.tgz',
+11 verbose tar pack   'C:\\Users\\Surface Pro 3\\Desktop\\git\\incremental-dom-jsonml' ]
+12 verbose tarball C:\Users\Surface Pro 3\AppData\Roaming\npm-cache\incremental-dom-jsonml\0.0.1\package.tgz
+13 verbose folder C:\Users\Surface Pro 3\Desktop\git\incremental-dom-jsonml
+14 verbose addLocalTarball adding from inside cache C:\Users\Surface Pro 3\AppData\Roaming\npm-cache\incremental-dom-jsonml\0.0.1\package.tgz
+15 silly cache afterAdd incremental-dom-jsonml@0.0.1
+16 verbose afterAdd C:\Users\Surface Pro 3\AppData\Roaming\npm-cache\incremental-dom-jsonml\0.0.1\package\package.json not in flight; writing
+17 verbose afterAdd C:\Users\Surface Pro 3\AppData\Roaming\npm-cache\incremental-dom-jsonml\0.0.1\package\package.json written
+18 silly publish { name: 'incremental-dom-jsonml',
+18 silly publish   version: '0.0.1',
+18 silly publish   description: 'JSONML IncrementalDOM interpreter',
+18 silly publish   main: 'index.js',
+18 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+18 silly publish   repository:
+18 silly publish    { type: 'git',
+18 silly publish      url: 'git+https://github.com/paolocaminiti/incremental-dom-jsonml.git' },
+18 silly publish   keywords: [ 'JSONML', 'IncrementalDOM', 'template', 'view', 'html' ],
+18 silly publish   author:
+18 silly publish    { name: 'Paolo Caminiti',
+18 silly publish      email: 'paolo.caminiti@gmail.com',
+18 silly publish      url: 'https://github.com/paolocaminiti' },
+18 silly publish   license: 'MIT',
+18 silly publish   bugs: { url: 'https://github.com/paolocaminiti/incremental-dom-jsonml/issues' },
+18 silly publish   homepage: 'https://github.com/paolocaminiti/incremental-dom-jsonml#readme',
+18 silly publish   dependencies: { 'incremental-dom': 'git+https://github.com/paolocaminiti/incremental-dom.git' },
+18 silly publish   readme: '## Because your DOM ain\'t nothing but a nested list!\r\n\r\n#### No, seriously, why JSONML...\r\n- there\'s nothing fancy about it, not even the name.\r\n- there\'s no syntax to learn, no arbitrary semantics overhead either.\r\n- there\'s no directives, factories, superheros, added magic or atomic science.\r\n\r\nThere\'s litterally about nothing to learn here, meaning very little risk of forthcoming obsolescence. The fine art of lists composition has been around forever, jsonml quite a while as well.\r\n\r\nYour DOM is expressed by nested arrays as a pure data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, external libraries, ES6 goodness.\r\n\r\nTogheter with Incremental DOM it allows in place DOM mutations, which leads to declarative views.\r\n\r\n##### Live demos\r\n[circles](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/circles), benchmark.\r\n\r\n[dbmonster](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/dbmonster), benchmark.\r\n\r\n[primer6](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/primer6), *shouldComponentUpdate* equivalent.\r\n\r\n##### Basic usage\r\n```javascript\r\nfunction item(i, index) {\r\n  function action (e) {\r\n    var text = e.target.stateRef.text\r\n    console.log(text)\r\n  }\r\n\r\n  return [\'li\',\r\n    [\'div.class-1.class-2\', { style: \'color: blue;\' }\r\n      `item: ${index} `,\r\n      i.text\r\n    ],\r\n    [\'button\', { onclick: action, stateRef: i }]\r\n  ]\r\n}\r\n\r\nfunction list(state) {\r\n  return [\'ul\', ...state.list.map(item)]\r\n}\r\n\r\nfunction app(state) {\r\n  return [\'#approt.app\', { style: { color: \'black\' } },\r\n    [\'p\', \'A list in an app\'],\r\n    list(state)\r\n  ]\r\n}\r\n\r\nfunction update() {\r\n  IncrementalDOM.patch(node, jsonml, app(state))\r\n}\r\n```\r\n\r\n##### All there is to know about JSONML\r\n- A nested array maps 1:1 to your DOM.\r\n- Each array describes an element.\r\n- The head of each array is by convention the tag name.\r\n- An optional subsequesnt object will contain key/value pairs for the attributes.\r\n- All following items in the array are children of the element: arrays again for elements, everything else as text nodes.\r\n\r\n##### Specific to this library\r\nThe *head of the array* accepts css syntax for id and classes \'div#id.class1.class2\' and defaults to DIV.\r\n\r\nChildren positions containing falsy values are just ignored, this simplifies composition by allowing fragment functions to return undefined.\r\n\r\nAttributes values of type Object or Function will be [assigned as properties](http://google.github.io/incremental-dom/#rendering-dom/attributes-and-properties) of the element.\r\n\r\n*{ _key: uniqueKey, ... }* attribute assigns an Incremental DOM key to the element.\r\n\r\n##### Where is *shouldComponentUpdate*?\r\n*{ _skip: true, ... }* on an element will tell Incremental DOM to skip diffing it\'s descendants and resume traversal. This effectively let\'s you treat an element as a "component" root that doesn\'t need any update. Element _key is mandatory in this case. (See primer6 demo for possible usage).\r\n\r\n##### Advanced tricks\r\nStyle attribute can be assigned both as a string or an object, [an object being mapped directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).\r\n\r\nBy assigning objects to element\'s properties arbitrary data, other than standard properties, can be added to any element, this is expecially usefull in event handling.\r\n\r\nWhen you want to coherce a string or number to be assigned as a property instead of an attribute create a new instance of it *{ inputValueName: new String(value), ... }*.\r\n\r\nTODO Mixing static content\r\n\r\n### Learn more\r\nReally that\'s all there is to learn.\r\n\r\nI suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debugger to get a full picture of what is going on.\r\n\r\n[http://www.jsonml.org/](http://www.jsonml.org/) may also be a source of related usefull infos.\r\n\r\nBTW the library plays just fine with [Redux](https://github.com/rackt/redux), an example is coming.\r\n\r\nBrowser compatibility is just the same as Incremental DOM itself, which by now seems to target IE9.\r\n\r\n### Opinions\r\n\r\n##### Incremental DOM is still experimental\r\nThe stability of the JSONML format somewhat protects from Incremental DOM experimental status. Still things like *_key*, *_skip*, *statics/dynamic properties* assignment, and eventual new features or better understanding may vary this repo.\r\n\r\n##### Compatibility with standard jsonml code\r\nOnly one attributes object at position 1 of the element\'s array is allowed. This is the only incompatibility with standard jsonml where multiple attributes objects can be scattered anywhere after the head. Implementing this with Incremental DOM would be a performance hit on long child lists, and frankly i never used it.\r\n\r\n##### Routing\r\nTODO Howto routing\r\n\r\n##### Performance considerations\r\nTODO\r\n\r\n##### What\'s it good for?\r\nTODO\r\n\r\n##### Server side rendering\r\n[Look here for experiments](https://github.com/paolocaminiti/incremental-dom-to-string) in this direction, turns out Incremental DOM API is really simple to map to string output.\r\n\r\n##### About this library\r\nAll this library does is making the relevant Incremental DOM calls while traversing the JSONML DOM description.\r\n\r\nAt around 50 loc not only it\'s lightweight (Incremental DOM itself is < 10kb), it\'s easily hackable to tailor around any specific needs you may encounter in your projects, instead of resorting on weird workarounds.\r\n\r\nThere are lots of ways to use Incremental DOM methods, I tried out many, the code published here is and will be changed according to the simplest and most performant I can come with.\r\n\r\n##### Further\r\nTODO\r\n\r\n##### Tests\r\nOnce I settle on how to do it properly along with Incremental DOM.\r\n',
+18 silly publish   readmeFilename: 'README.md',
+18 silly publish   gitHead: '4c07df34adb741f55a52a9d7cf64a7f793e025d8',
+18 silly publish   _id: 'incremental-dom-jsonml@0.0.1',
+18 silly publish   _shasum: 'b31c491fb67fd3631141819aa0a10d938b3166a0',
+18 silly publish   _from: '.' }
+19 verbose getPublishConfig undefined
+20 silly mapToRegistry name incremental-dom-jsonml
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry uri https://registry.npmjs.org/incremental-dom-jsonml
+24 verbose publish registryBase https://registry.npmjs.org/
+25 silly publish uploading C:\Users\Surface Pro 3\AppData\Roaming\npm-cache\incremental-dom-jsonml\0.0.1\package.tgz
+26 verbose request uri https://registry.npmjs.org/incremental-dom-jsonml
+27 verbose request sending authorization for write operation
+28 info attempt registry request try #1 at 7:48:35 PM
+29 verbose request using bearer token for auth
+30 verbose request id 076465b452f0f99d
+31 http request PUT https://registry.npmjs.org/incremental-dom-jsonml
+32 http 403 https://registry.npmjs.org/incremental-dom-jsonml
+33 verbose headers { 'content-type': 'application/json',
+33 verbose headers   'cache-control': 'max-age=60',
+33 verbose headers   'content-length': '95',
+33 verbose headers   'accept-ranges': 'bytes',
+33 verbose headers   date: 'Sun, 22 Nov 2015 19:48:38 GMT',
+33 verbose headers   via: '1.1 varnish',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'x-served-by': 'cache-lhr6321-LHR',
+33 verbose headers   'x-cache': 'MISS',
+33 verbose headers   'x-cache-hits': '0',
+33 verbose headers   'x-timer': 'S1448221716.495441,VS0,VE1742' }
+34 verbose request invalidating C:\Users\Surface Pro 3\AppData\Roaming\npm-cache\registry.npmjs.org\incremental-dom-jsonml on PUT
+35 error publish Failed PUT 403
+36 verbose stack Error: "You cannot publish over the previously published version 0.0.1." : incremental-dom-jsonml
+36 verbose stack     at makeError (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:264:12)
+36 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:252:14)
+36 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:172:14)
+36 verbose stack     at Request.self.callback (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:198:22)
+36 verbose stack     at emitTwo (events.js:87:13)
+36 verbose stack     at Request.emit (events.js:172:7)
+36 verbose stack     at Request.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1063:14)
+36 verbose stack     at emitOne (events.js:82:20)
+36 verbose stack     at Request.emit (events.js:169:7)
+36 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1009:12)
+37 verbose statusCode 403
+38 verbose pkgid incremental-dom-jsonml
+39 verbose cwd C:\Users\Surface Pro 3\Desktop\git\incremental-dom-jsonml
+40 error Windows_NT 10.0.10240
+41 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+42 error node v5.0.0
+43 error npm  v3.3.6
+44 error code E403
+45 error "You cannot publish over the previously published version 0.0.1." : incremental-dom-jsonml
+46 error If you need help, you may report this error at:
+46 error     <https://github.com/npm/npm/issues>
+47 verbose exit [ 1, true ]
