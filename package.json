@@ -1,6 +1,6 @@
 {
   "name": "incremental-dom-jsonml",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JSONML IncrementalDOM interpreter",
   "main": "index.js",
   "scripts": {

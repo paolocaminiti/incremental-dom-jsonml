@@ -79,58 +79,25 @@ When you want to coherce a string or number to be assigned as a property instead
 
 TODO Mixing static content
 
+##### Server side rendering
+[Look here for experiments](https://github.com/paolocaminiti/incremental-dom-to-string) in this direction, turns out Incremental DOM API is really simple to map to string output.
+
+##### Browser compatibility
+
+Just the same as Incremental DOM itself, which by now seems to target IE9.
+
 ### Learn more
 Really that's all there is to learn.
+
+ES6 modules + [Redux](https://github.com/rackt/redux) seem a very good option to go, allowing scalability while keeping things simple and real.
 
 I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debugger to get a full picture of what is going on.
 
 [http://www.jsonml.org/](http://www.jsonml.org/) may also be a source of related usefull infos.
 
-BTW the library plays just fine with [Redux](https://github.com/rackt/redux), an example is coming.
-
-Browser compatibility is just the same as Incremental DOM itself, which by now seems to target IE9.
+##### Tests
+Once I settle on how to do it properly along with Incremental DOM.
 
 ### Opinions
 
-##### Incremental DOM is still experimental
-The stability of the JSONML format somewhat protects from Incremental DOM experimental status. Still things like *_key*, *_skip*, *statics/dynamic properties* assignment, and eventual new features or better understanding may vary this repo.
-
-##### Compatibility with standard JSONML code
-Only one attributes object at position 1 of the element's array is allowed. This is the only incompatibility with standard JSNOML where multiple attributes objects can be scattered anywhere after the head. Implementing this with Incremental DOM would be a performance hit on long child lists, and frankly i never used it. Overall introducing this library into an existing code base should be straightforward, although its real benefits will only come refactoring app architecture to a more declarative style, which is another matter.
-
-##### Performance considerations
-Talking raw frame rate, the demos provided sit few fps behind hand coded incremental dom implementations. Performance can be made even closer by assigning some attributes, like the id and class from the tag definition, as Incremental DOM static properties, unfortunately right now this would mean providing a key for each element created with static properties (this is something the Incremental DOM team seems to be addressing, this library will be updated as soon as it gets stable).
-
-That said performance is not so much of a deal, we are not doing videogames here and all demos presented are mere exagerations. Thanks to Incremental DOM the result is already excellent for real world web apps, in many cases ahead of far more complex libraries around.
-
-What's really interesting is that memory behaves very well too, the array describing the dom is an easy target for GC and the memory footprint of the running demos stays stable, perfectly in line with the hand coded counterparts.
-
-The transpiled approaches generating the Incremental DOM code from templating languages at build time will always have the last word here, but unless you're constrained by extreme performance/memory limitations this should not be of any concern.
-
-##### What's it good for?
-This library has no opinions about code architecture, so probably shouldn't be your pick for the next big monster project that will try to fire back at you as soon as you release it.
-
-If you have a small project, or simply don't make monsters, like to have full control of your code architecture with a bit of third party libraries and much vanilla on top, then you can give it a try: expecially in small projects, coding without big misterious dependencies can be a refreshing experience.
-
-Personally I used standard JSONML for a long time to develop browser extensions, where you want to load as little dependencies as possible, adding Incremental DOM to the mix now allows far better reasoning and far simpler architecture.
-
-ES6 modules + Redux seem a very good option to go, allowing scalability while keeping things simple and real.
-
-##### Routing
-TODO How to routing
-
-##### Server side rendering
-[Look here for experiments](https://github.com/paolocaminiti/incremental-dom-to-string) in this direction, turns out Incremental DOM API is really simple to map to string output.
-
-##### About this library
-All this library does is making the relevant Incremental DOM calls while traversing the JSONML DOM description.
-
-At around 50 loc not only it's lightweight (Incremental DOM itself is < 10kb), it's easily hackable to tailor around any specific needs you may encounter in your projects, instead of resorting on weird workarounds.
-
-There are lots of ways to use Incremental DOM methods, I tried out many, the code published here is and will be changed according to the simplest and most performant I can come with.
-
-##### Further
-TODO
-
-##### Tests
-Once I settle on how to do it properly along with Incremental DOM.
+[Link to irrelevant rumblings] about performance and app architecture.(http://paolocaminiti.github.io/incremental-dom-jsonml/OPINIONS.md)
