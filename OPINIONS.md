@@ -40,4 +40,4 @@ Personally, I believe client side routing is a very broken metaphor. All we do o
 JSONML is a fully serializable format sitting beetween you intentions and real DOM rendering. This means it can be composed in a separate thread. My own experience showed web workers never pay off when it comes to such a fast process like generating a full UI. But this opens the way to service workers as well as to UI being rendered by an Incremental DOM equivalent on a mobile native thread.
 
 ##### Ok, but seriously, why JSONML...
-[Because we should have gone lists data structures and S-expressions from the very beginning of this XML thing] (http://www-formal.stanford.edu/jmc/slides/wrong/wrong-sli/wrong-sli.html) :)
+Because [we should have gone lists data structures and S-expressions from the very beginning of this XML thing] (http://www-formal.stanford.edu/jmc/slides/wrong/wrong-sli/wrong-sli.html) :)
