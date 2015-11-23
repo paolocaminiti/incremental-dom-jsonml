@@ -59,7 +59,7 @@ function update() {
 - All following items in the array are children of the element: arrays again for elements, everything else as text nodes.
 
 ##### Specific to this library
-The *head of the array* accepts css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Note that dynamic attributes are better declared in the attributes object { id: dynamicId, class: dynamicClasses, ... }.
+The *head of the array* accepts css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Note that dynamic attributes are better declared in the attributes object *{ id: dynamicId, class: dynamicClasses, ... }*.
 
 Children positions containing falsy values are just ignored, this simplifies composition by allowing fragment functions to return undefined.
 
@@ -71,7 +71,7 @@ Attributes values of type Object or Function will be [assigned as properties](ht
 *{ _skip: true, ... }* on an element will tell Incremental DOM to skip diffing it's descendants and resume traversal. This effectively let's you treat an element as a "component" root that doesn't need any update. Element _key is mandatory in this case. (See [primer6 demo](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/primer6/) for possible usage).
 
 ##### Advanced tricks
-Style attribute can be assigned both as a string or an object, [an object being mapped directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
+A *style* attribute can be assigned both as a string or an object, [an object being mapped directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
 
 By assigning objects to element's properties arbitrary data, other than standard properties, can be added to any element, this is expecially usefull in event handling.
 
