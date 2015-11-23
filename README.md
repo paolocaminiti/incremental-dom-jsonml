@@ -7,7 +7,7 @@
 
 There's litterally about nothing to learn here, meaning very little risk of forthcoming obsolescence. The fine art of lists composition has been around forever, jsonml quite a while as well.
 
-Your DOM is expressed by nested arrays as a pure data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, external libraries, ES6 goodness.
+Your DOM is expressed by nested arrays as a simple data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, external libraries, ES6 goodness.
 
 Togheter with Incremental DOM it allows in place DOM mutations, which leads to declarative views.
 
