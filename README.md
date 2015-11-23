@@ -95,9 +95,9 @@ I suggest reading the, short, [Incremental DOM documentation](http://google.gith
 
 [http://www.jsonml.org/](http://www.jsonml.org/) may also be a source of related usefull infos.
 
-##### Tests
+### Tests
 Once I settle on how to do it properly along with Incremental DOM.
 
 ### Opinions
 
-[Link to irrelevant rumblings] about performance and app architecture.(http://paolocaminiti.github.io/incremental-dom-jsonml/OPINIONS.md)
+[Link to irrelevant rumblings](https://github.com/paolocaminiti/incremental-dom-jsonml/blob/master/OPINIONS.md) about performance and apps' architecture.
