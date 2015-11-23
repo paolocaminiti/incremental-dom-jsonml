@@ -59,7 +59,7 @@ function update() {
 - All following items in the array are children of the element: arrays again for elements, everything else as text nodes.
 
 ##### Specific to this library
-The *head of the array* accepts css syntax for id and classes 'div#id.class1.class2' and defaults to DIV.
+The *head of the array* accepts css syntax for id and classes 'div#id.class1.class2' and defaults to DIV. Note that dynamic attributes are better declared in the attributes object { id: dynamicId, class: dynamicClasses, ... }.
 
 Children positions containing falsy values are just ignored, this simplifies composition by allowing fragment functions to return undefined.
 
