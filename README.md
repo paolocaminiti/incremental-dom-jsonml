@@ -96,25 +96,25 @@ Browser compatibility is just the same as Incremental DOM itself, which by now s
 The stability of the JSONML format somewhat protects from Incremental DOM experimental status. Still things like *_key*, *_skip*, *statics/dynamic properties* assignment, and eventual new features or better understanding may vary this repo.
 
 ##### Compatibility with standard JSONML code
-Only one attributes object at position 1 of the element's array is allowed. This is the only incompatibility with standard JSNOML where multiple attributes objects can be scattered anywhere after the head. Implementing this with Incremental DOM would be a performance hit on long child lists, and frankly i never used it.
+Only one attributes object at position 1 of the element's array is allowed. This is the only incompatibility with standard JSNOML where multiple attributes objects can be scattered anywhere after the head. Implementing this with Incremental DOM would be a performance hit on long child lists, and frankly i never used it. Overall introducing this library into an existing code base should be straightforward, although its real benefits will only come refactoring app architecture to a more declarative style, which is another matter.
 
 ##### Performance considerations
-Talking raw frame rate, the demos provided sit just slightly behind hand coded incremental dom implementations. Performance can be made even closer by assigning some attributes, like the id and class from the tag definition, as Incremental DOM static properties, unfortunately right now this would mean providing a key for each element created with static properties (this is something the Incremental DOM team seems to be addressing, this library will be updated as soon as it gets stable).
+Talking raw frame rate, the demos provided sit few fps behind hand coded incremental dom implementations. Performance can be made even closer by assigning some attributes, like the id and class from the tag definition, as Incremental DOM static properties, unfortunately right now this would mean providing a key for each element created with static properties (this is something the Incremental DOM team seems to be addressing, this library will be updated as soon as it gets stable).
 
 That said performance is not so much of a deal, we are not doing videogames here and all demos presented are mere exagerations. Thanks to Incremental DOM the result is already excellent for real world web apps, in many cases ahead of far more complex libraries around.
 
 What's really interesting is that memory behaves very well too, the array describing the dom is an easy target for GC and the memory footprint of the running demos stays stable, perfectly in line with the hand coded counterparts.
 
-The transpiled approaches generating the Incremental DOM code from templating languages at build time should always have the last word here, but unless you're constrained by extreme performance/memory limitations this should not be of any concern.
+The transpiled approaches generating the Incremental DOM code from templating languages at build time will always have the last word here, but unless you're constrained by extreme performance/memory limitations this should not be of any concern.
 
 ##### What's it good for?
 This library has no opinions about code architecture, so probably shouldn't be your pick for the next big monster project that will try to fire back at you as soon as you release it.
 
 If you have a small project, or simply don't make monsters, like to have full control of your code architecture with a bit of third party libraries and much vanilla on top, then you can give it a try: expecially in small projects, coding without big misterious dependencies can be a refreshing experience.
 
-I personally used JSONML for a long time to develop browser extensions, where you want to load as little dependencies as possible, and I can tell adding Incremental DOM to the mix allows far better reasoning and far simpler architecture.
+Personally I used standard JSONML for a long time to develop browser extensions, where you want to load as little dependencies as possible, adding Incremental DOM to the mix now allows far better reasoning and far simpler architecture.
 
-ES6 modules + Redux seems a very good match to this library, promising scalability while keeping things simple and real.
+ES6 modules + Redux seem a very good option to go, allowing scalability while keeping things simple and real.
 
 ##### Routing
 TODO How to routing
