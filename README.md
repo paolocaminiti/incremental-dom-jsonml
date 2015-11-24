@@ -89,7 +89,7 @@ Just the same as Incremental DOM itself, which by now seems to target IE9.
 ### Learn more
 Really that's all there is to learn.
 
-ES6 modules + [Redux](https://github.com/rackt/redux) seem a very good option to go, allowing scalability while keeping things simple and real.
+ES6 modules + [Redux](https://github.com/rackt/redux) seem a very good option to go, allowing scalability while keeping things simple and real, an example is coming.
 
 I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debugger to get a full picture of what is going on.
 
