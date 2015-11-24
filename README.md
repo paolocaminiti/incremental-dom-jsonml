@@ -9,7 +9,7 @@ There's litterally about nothing to learn here, meaning very little risk of fort
 
 Your DOM is expressed by nested arrays as a simple data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, external libraries, ES6 goodness.
 
-Togheter with Incremental DOM it allows in place DOM mutations, which leads to declarative views.
+Togheter with [Incremental DOM](https://github.com/google/incremental-dom) it allows in place DOM mutations, which leads to declarative views.
 
 ##### Live demos
 [circles](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/circles), benchmark.
