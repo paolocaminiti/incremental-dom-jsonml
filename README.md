@@ -73,7 +73,7 @@ Attributes values of type Object or Function will be [assigned as properties](ht
 ##### Advanced tricks
 A *style* attribute can be assigned both as a string or an object, [an object being mapped directly to style properties](http://google.github.io/incremental-dom/#rendering-dom/applying-styles).
 
-By assigning objects to element's properties arbitrary data, other than standard properties, can be added to any element, this is expecially usefull in event handling.
+By assigning objects to element's properties, arbitrary data other than standard properties can be added to any element, this is expecially usefull in event handling.
 
 When you want to coherce a string or number to be assigned as a property instead of an attribute create a new instance of it *{ inputValueName: new String(value), ... }*.
 
@@ -89,7 +89,7 @@ Just the same as Incremental DOM itself, which by now seems to target IE9.
 ### Learn more
 Really that's all there is to learn.
 
-ES6 modules + [Redux](https://github.com/rackt/redux) seem a very good option to go, allowing scalability while keeping things simple and real, an example is coming.
+ES6 modules + [Redux](https://github.com/rackt/redux) seem a very good option to go along, allowing scalability while keeping things simple and real, an example is coming.
 
 I suggest reading the, short, [Incremental DOM documentation](http://google.github.io/incremental-dom/#about) and running one of their small examples in the debugger to get a full picture of what is going on.
 
