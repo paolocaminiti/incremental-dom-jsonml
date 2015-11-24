@@ -77,7 +77,7 @@ By assigning objects to element's properties, arbitrary data other than standard
 
 When you want to coherce a string or number to be assigned as a property instead of an attribute create a new instance of it *{ inputValueName: new String(value), ... }*.
 
-Sometime you'll need to mix static HTML content (ex. ajax content sent by a server) into your JSONML, while you can assign it to the .innerHTML property of a node using the attributs object, you would lose control over it. [Here is a gist](https://gist.github.com/paolocaminiti/df203b27f63debb76378) to convert HTML strings and DOM fragments to JSONML, so that you can have full control of them and get them rendered along the rest of your JSONML by Incremental DOM.
+Sometime you'll need to mix static HTML content (ex. ajax content sent by a server) into your JSONML, while you can assign it to the .innerHTML property of a node using the attributes object, you would lose control over it. [Here is a gist](https://gist.github.com/paolocaminiti/df203b27f63debb76378) to convert HTML strings and DOM fragments to JSONML, so that you can have full control of them and get them rendered along the rest of your JSONML by Incremental DOM.
 
 ##### Server side rendering
 [Look here for experiments](https://github.com/paolocaminiti/incremental-dom-to-string) in this direction, turns out Incremental DOM API is really simple to map to string output.
