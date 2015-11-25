@@ -10,7 +10,7 @@ There are lots of ways to use Incremental DOM methods, I tried out many, the cod
 ##### What's it good for?
 This library has no opinions about code architecture, so probably shouldn't be your pick for the next big monster project that will try to fire back at you as soon as you release it.
 
-If you have a small project, or simply don't make monsters, like to have full control of your code architecture with a bit of third party libraries and much vanilla on top, then you can give it a try: expecially in small projects, coding without big misterious dependencies can be a refreshing experience.
+If you have a small project, or simply don't make monsters, like to have full control of your code architecture with a bit of third party libraries and much vanilla on top, then you can give it a try: especially in small projects, coding without big mysterious dependencies can be a refreshing experience.
 
 Personally I used standard JSONML for a long time to develop browser extensions, where you want to load as little dependencies as possible, adding Incremental DOM to the mix now allows far better reasoning and far simpler architecture.
 
@@ -37,7 +37,7 @@ Standard JSNOML doesn't specify this, some parsers will allow multiple attribute
 Personally, I believe client side routing is a very broken metaphor. All we do on the client is extract properties from the hash to determine the state for our app. Just listen for the hash change, extract your parameters as freely as you need, map them to your app state and exploit them as conditions in you fragments functions. Other than easy, this allows great flexibility, like mantaining state of multiple parallel fragments with [multidimensional notation](http://www.w3.org/DesignIssues/MatrixURIs.html).
 
 ##### Further
-JSONML is a fully serializable format sitting beetween you intentions and real DOM rendering. This means it can be composed in a separate thread. My own experience showed web workers never pay off when it comes to such a fast process like generating a full UI. But this opens the way to service workers as well as to UI being rendered by an Incremental DOM equivalent on a mobile native thread.
+JSONML is a fully serializable format sitting between you intentions and real DOM rendering. This means it can be composed in a separate thread. My own experience showed web workers never pay off when it comes to such a fast process like generating a full UI. But this opens the way to service workers as well as to UI being rendered by an Incremental DOM equivalent on a mobile native thread.
 
 ##### Yes, but seriously, why JSONML...
 Because [we should have gone lists data structures and S-expressions from the very beginning of this XML thing] (http://www-formal.stanford.edu/jmc/slides/wrong/wrong-sli/wrong-sli.html) :)
