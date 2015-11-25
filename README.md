@@ -101,4 +101,3 @@ Once I settle on how to do it properly along with Incremental DOM.
 ### Opinions
 
 [Link to irrelevant rumblings](https://github.com/paolocaminiti/incremental-dom-jsonml/blob/master/OPINIONS.md) about performance and apps' architecture.
-
