@@ -9,7 +9,7 @@ There's litterally about nothing to learn here, meaning very little risk of fort
 
 Your DOM is expressed by nested arrays as a simple data structure. You can compose it exploiting the full expressiveness of the language, from pure functions to array extras, external libraries, ES6 goodness.
 
-Togheter with [Incremental DOM](https://github.com/google/incremental-dom) it allows in place DOM mutations, which leads to declarative views.
+Together with [Incremental DOM](https://github.com/google/incremental-dom) it allows efficient in place DOM mutations, letting UI be a function of state.
 
 ##### Live demos
 [circles](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/circles), benchmark.
@@ -20,12 +20,12 @@ Togheter with [Incremental DOM](https://github.com/google/incremental-dom) it al
 
 ##### Basic usage
 ```javascript
-function item(i, index) {
-  function action (e) {
-    var text = e.target.stateRef.text
-    console.log(text)
-  }
+function action (e) {
+  var text = e.target.stateRef.text
+  console.log(text)
+}
 
+function item(i, index) {
   return ['li',
     ['div.class-1.class-2', { style: 'color: blue;' }
       `item: ${index} `,
