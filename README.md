@@ -20,7 +20,7 @@ Together with [Incremental DOM](https://github.com/google/incremental-dom) it al
 
 ##### Basic usage
 ```javascript
-function action (e) {
+function action(e) {
   var text = e.target.stateRef.text
   console.log(text)
 }
