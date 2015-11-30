@@ -29,9 +29,9 @@ The transpiled approaches generating the Incremental DOM code from templating la
 The stability of the JSONML format somewhat protects from Incremental DOM experimental status. Still things like *_key*, *_skip*, *statics/dynamic properties* assignment, and eventual new features or better understanding may vary this repo.
 
 ##### Compatibility with standard JSONML code
-Only one attributes object at position 1 of the element's array is allowed.
+Only one attributes object at position 1 of the element's array is allowed. Standard JSNOML doesn't specify this, so [most parsers](https://gist.github.com/paolocaminiti/a828900d1e9dad44f97b) will allow multiple attributes objects to be scattered anywhere after the head. Implementing this with Incremental DOM would be a performance hit on long child lists, and frankly I never used it.
 
-Standard JSNOML doesn't specify this, some parsers will allow multiple attributes objects to be scattered anywhere after the head. Implementing this with Incremental DOM would be a performance hit on long child lists, and frankly I never used it. Overall introducing this library into an existing code base should be straightforward, although its real benefits will only come refactoring app architecture to a more declarative style, which is another matter.
+Overall introducing this library into an existing code base should be straightforward, although its real benefits will only come refactoring app architecture to a more declarative style, which is another matter.
 
 ##### Routing
 Personally, I believe client side routing is a very broken metaphor. All we do on the client is extract properties from the hash to determine the state for our app. Just listen for the hash change, extract your parameters as freely as you need, map them to your app state and exploit them as conditions in you fragments functions. Other than easy, this allows great flexibility, like mantaining state of multiple parallel fragments with [multidimensional notation](http://www.w3.org/DesignIssues/MatrixURIs.html).
