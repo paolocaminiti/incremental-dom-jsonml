@@ -19,7 +19,7 @@ Again, ES6 modules + [Redux](https://github.com/rackt/redux) seem a very good op
 ##### Performance considerations
 Talking raw frame rate, the demos provided sit few fps behind hand coded incremental dom implementations. Performance can be made even closer by assigning some attributes, like the id and class from the tag definition, as Incremental DOM static properties, unfortunately right now this would mean providing a key for each element created with static properties (this is something the Incremental DOM team seems to be addressing, this library will be updated as soon as it gets stable).
 
-That said performance is not so much of a deal, we are not doing videogames here and all demos presented are mere exagerations. Thanks to Incremental DOM the result is already excellent for real world web apps, in many cases ahead of far more complex libraries around.
+That said performance is not so much of a deal, we are not doing videogames here and all demos presented are mere exagerations (dbmonster is updating 4600 elements per frame). Thanks to Incremental DOM the result is already excellent for real world web apps, in many cases ahead of far more complex libraries around.
 
 What's really interesting is that memory behaves very well too, the array describing the dom is an easy target for GC and the memory footprint of the running demos stays stable, perfectly in line with the hand coded counterparts.
 
