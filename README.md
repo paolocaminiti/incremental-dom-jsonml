@@ -40,7 +40,7 @@ function list(state) {
 }
 
 function app(state) {
-  return ['#approt.app', { style: { color: 'black' } },
+  return ['#approot', { style: { color: 'black' } },
     ['p', 'A list in an app'],
     list(state)
   ]
