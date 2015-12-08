@@ -18,7 +18,7 @@ Together with [Incremental DOM](https://github.com/google/incremental-dom) it al
 
 [primer6](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/primer6), *shouldComponentUpdate* equivalent by skipping descendants.
 
-[primer6-webcomponents](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/primer6-webcomponents), full React like components lifecycle via webcomponents.
+[primer6-webcomponents](http://paolocaminiti.github.io/incremental-dom-jsonml/demo/primer6-webcomponents), React like components lifecycle via webcomponents.
 
 ##### Basic usage
 ```javascript
