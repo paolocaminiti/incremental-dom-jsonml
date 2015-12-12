@@ -1,6 +1,6 @@
 {
   "name": "incremental-dom-jsonml",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "JSONML IncrementalDOM interpreter",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,8 @@
     "url": "git+https://github.com/paolocaminiti/incremental-dom-jsonml.git"
   },
   "keywords": [
-    "JSONML",
-    "IncrementalDOM",
+    "jsonml",
+    "incremental-dom",
     "template",
     "view",
     "html"
