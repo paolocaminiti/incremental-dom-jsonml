@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/paolocaminiti/incremental-dom-jsonml#readme",
   "dependencies": {
-    "incremental-dom": "git+https://github.com/paolocaminiti/incremental-dom.git"
+    "incremental-dom": "^0.3.0"
   }
 }
