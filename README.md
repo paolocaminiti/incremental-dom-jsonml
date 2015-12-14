@@ -37,14 +37,14 @@ function item(i, index) {
   ]
 }
 
-function list(state) {
-  return ['ul', ...state.list.map(item)]
+function list(list) {
+  return ['ul', ...list.map(item)]
 }
 
 function app(state) {
   return ['#approot', { style: { color: 'black' } },
     ['p', 'A list in an app'],
-    list(state)
+    list(state.list)
   ]
 }
 
