@@ -1,3 +1,5 @@
+**This repo is now deprecated, development moved to [jsonml2idom](https://github.com/paolocaminiti/jsonml2idom).**
+
 ## Because your DOM ain't nothing but a nested list!
 
 #### No, seriously, why JSONML...
